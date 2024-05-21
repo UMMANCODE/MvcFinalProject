@@ -1,0 +1,56 @@
+﻿@model PaginatedList<Event>
+<!-- Banner Area Start -->
+<div class="banner-area-wrapper">
+	<div class="banner-area text-center">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="banner-content-wrapper">
+						<div class="banner-content">
+							<h2>event</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Banner Area End -->
+<!-- Event Start -->
+<div class="event-area three text-center pt-150 pb-150">
+	<div class="container">
+		<div class="row" id="events-row">
+			@foreach (var evnt in Model.Items.Select((value, index) => new { value, index })) {
+				<div class='col-md-4 @(evnt.index % 8 == 7 ? "col-sm-6 hidden-xs" : evnt.index % 9 == 8 ? "hidden-sm hidden-xs" : "col-sm-6 col-xs-12")'>
+					<div class="single-event mb-60">
+						<div class="event-img">
+							<a asp-action="details" asp-controller="event" asp-route-id="@evnt.value.Id">
+								<img src="~/img/event/@evnt.value.ImageName" alt="event">
+								<div class="course-hover">
+									<i class="fa fa-link"></i>
+								</div>
+							</a>
+							<div class="event-date">
+								<h3>@evnt.value.StartDate.Day <span>@evnt.value.StartDate.ToString("MMM")</span></h3>
+							</div>
+						</div>
+						<div class="event-content text-left">
+							<h4><a asp-action="details" asp-controller="event" asp-route-id="@evnt.value.Id">@evnt.value.Name</a></h4>
+							<ul>
+								<li><span>time:</span> @evnt.value.StartDate.ToString("h.mm tt") - @evnt.value.EndDate.ToString("h.mm tt")</li>
+								<li><span>venue</span> @evnt.value.Venue</li>
+							</ul>
+							<div class="event-content-right">
+								<a class="default-btn" asp-action="details" asp-controller="event" asp-route-id="@evnt.value.Id">join now</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+		<!-- Pagination Nav Start -->
+		@Html.Partial("_PaginatedListPartial", Model)
+		<!-- Pagination Nav End -->
+	</div>
+</div>
+<!-- Event End -->

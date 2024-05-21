@@ -1,0 +1,89 @@
+﻿@model PaginatedList<Course>
+<!-- Banner Area Start -->
+<div class="banner-area-wrapper">
+	<div class="banner-area text-center">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="banner-content-wrapper">
+						<div class="banner-content">
+							<h2>courses</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Banner Area End -->
+<!-- Course Start -->
+<div class="course-area pt-150 pb-150">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="course-title">
+					<h3>search courses</h3>
+				</div>
+				<div class="course-form">
+					<form id="search" action="#">
+						<input id="search-input" type="search" placeholder="Search..." name="search" />
+						<button type="submit">search</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div id="courses-row" class="row">
+			@foreach (var course in Model.Items.Select((value, index) => new { value, index })) {
+				<div class='col-md-4 @(course.index == Model.Items.Count - 1 ? "hidden-sm" : "col-sm-6") col-xs-12'>
+					<div class="single-course mb-70">
+						<div class="course-img">
+							<a asp-action="details" asp-controller="course" asp-route-id="@course.value.Id">
+								<img src="~/img/course/@course.value.ImageName" alt="course">
+								<div class="course-hover">
+									<i class="fa fa-link"></i>
+								</div>
+							</a>
+						</div>
+						<div class="course-content">
+							<h3><a asp-action="details" asp-controller="course" asp-route-id="@course.value.Id">@course.value.Name</a></h3>
+							<p>@course.value.Description</p>
+							<a class="default-btn" asp-action="details" asp-controller="course" asp-route-id="@course.value.Id">read more</a>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+		<!-- Pagination Nav Start -->
+		@Html.Partial("_PaginatedListPartial", Model)
+		<!-- Pagination Nav End -->
+	</div>
+</div>
+<!-- Course End -->
+@section Scripts {
+	<script>
+		$(document).ready(function () {
+			$('#search').on('submit', function (e) {
+				e.preventDefault();
+				var search = $("#search-input").val();
+				$.ajax({
+					url: '/course/search',
+					type: 'GET',
+					data: { q: search },
+					success: function (data) {
+						$('.course-area #courses-row').html(data);
+						var activeElement = $('.pagination .active');
+						activeElement.removeClass('active');
+						var spanElement = activeElement.find('.page-link');
+						var pageNumber = spanElement.text();
+						var pageLink = $('<a>')
+							.attr('href', '?page=' + pageNumber)
+							.addClass('page-link')
+							.text(pageNumber)
+							.css('color', 'white');
+						spanElement.replaceWith(pageLink);
+					}
+				});
+			});
+		});
+	</script>
+}

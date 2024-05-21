@@ -1,0 +1,22 @@
+﻿@model List<Blog>
+@foreach (var blog in Model.Select((value, index) => new { value, index })) {
+	<div class='col-md-4 @(blog.index % 9 == 7 || blog.index % 9 == 6 ? "col-sm-6 hidden-xs" : blog.index % 9 == 8 ? "hidden-sm col-xs-12" : "col-sm-6 col-xs-12")'>
+		<div class="single-blog mb-60">
+			<div class="blog-img">
+				<a asp-action="details" asp-controller="blog" asp-route-id="@blog.value.Id"><img src="~/img/blog/@blog.value.ImageName" alt="blog"></a>
+				<div class="blog-hover">
+					<i class="fa fa-link"></i>
+				</div>
+			</div>
+			<div class="blog-content">
+				<div class="blog-top">
+					<p>@blog.value.Author  /  @blog.value.Date.ToString("d, MMMM yyyy")  /  <i class="fa fa-comments-o"></i> CommentCount </p>
+				</div>
+				<div class="blog-bottom">
+					<h2><a asp-action="details" asp-controller="blog" asp-route-id="@blog.value.Id">@blog.value.Name</a></h2>
+					<a asp-action="details" asp-controller="blog" asp-route-id="@blog.value.Id">read more</a>
+				</div>
+			</div>
+		</div>
+	</div>
+}

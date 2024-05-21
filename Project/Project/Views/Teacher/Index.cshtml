@@ -1,0 +1,47 @@
+﻿@model PaginatedList<Teacher>
+<!-- Banner Area Start -->
+<div class="banner-area-wrapper">
+	<div class="banner-area text-center">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="banner-content-wrapper">
+						<div class="banner-content">
+							<h2>our teachers</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Banner Area End -->
+<!-- Teacher Start -->
+<div class="teacher-area pt-150 pb-105">
+	<div class="container">
+		<div class="row">
+			@foreach (var teacher in Model.Items) {
+				<div class="col-md-3 col-sm-4 col-xs-12">
+					<div class="single-teacher mb-45">
+						<div class="single-teacher-img">
+							<a asp-action="details" asp-controller="teacher" asp-route-id="@teacher.Id"><img src="~/img/teacher/@teacher.ImageName" alt="teacher"></a>
+						</div>
+						<div class="single-teacher-content text-center">
+							<h2><a asp-action="details" asp-controller="teacher" asp-route-id="@teacher.Id">@teacher.FullName</a></h2>
+							<h4>@teacher.Position</h4>
+							<ul>
+								@foreach (var social in teacher.TeacherIcons.Select(ti => ti.Icon)) {
+								<li><a href="@social.Url"><i class="@social.Name"></i></a></li>
+								}
+							</ul>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+		<!-- Pagination Nav Start -->
+		@Html.Partial("_PaginatedListPartial", Model)
+		<!-- Pagination Nav End -->
+	</div>
+</div>
+<!-- Teacher End -->
