@@ -10,5 +10,10 @@ namespace Project.Services {
 		public Dictionary<string, string> GetSettings() {
 			return _context.Settings.ToDictionary(x => x.Key, x => x.Value);
 		}
-	}
+
+		public List<string> GetCruds()
+		{
+			return new List<string> { "Course", "Event", "Blog", "Slider", "Testimonial", "Teacher", "Category", "Tag", "Notice", "Feature" };
+        }
+    }
 }

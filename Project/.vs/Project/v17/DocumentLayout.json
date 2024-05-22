@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ummanmm\\Desktop\\MVC\\Project\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B61C5F9C-91EF-46BA-848E-9D3258E8A9F3}|Project\\Project.csproj|c:\\users\\ummanmm\\desktop\\mvc\\project\\project\\areas\\manage\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B61C5F9C-91EF-46BA-848E-9D3258E8A9F3}|Project\\Project.csproj|solutionrelative:project\\areas\\manage\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B61C5F9C-91EF-46BA-848E-9D3258E8A9F3}|Project\\Project.csproj|c:\\users\\ummanmm\\desktop\\mvc\\project\\project\\areas\\manage\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B61C5F9C-91EF-46BA-848E-9D3258E8A9F3}|Project\\Project.csproj|solutionrelative:project\\areas\\manage\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B61C5F9C-91EF-46BA-848E-9D3258E8A9F3}|Project\\Project.csproj|c:\\users\\ummanmm\\desktop\\mvc\\project\\project\\areas\\manage\\views\\auth\\createadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B61C5F9C-91EF-46BA-848E-9D3258E8A9F3}|Project\\Project.csproj|solutionrelative:project\\areas\\manage\\views\\auth\\createadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\ummanmm\\Desktop\\MVC\\Project\\Project\\Areas\\Manage\\Views\\Auth\\Login.cshtml",
+              "RelativeDocumentMoniker": "Project\\Areas\\Manage\\Views\\Auth\\Login.cshtml",
+              "ToolTip": "C:\\Users\\ummanmm\\Desktop\\MVC\\Project\\Project\\Areas\\Manage\\Views\\Auth\\Login.cshtml",
+              "RelativeToolTip": "Project\\Areas\\Manage\\Views\\Auth\\Login.cshtml",
+              "ViewState": "AQIAAFEAAAAAAAAAAAAAAFcAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-22T17:13:33.065Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CreateAdmin.cshtml",
+              "DocumentMoniker": "C:\\Users\\ummanmm\\Desktop\\MVC\\Project\\Project\\Areas\\Manage\\Views\\Auth\\CreateAdmin.cshtml",
+              "RelativeDocumentMoniker": "Project\\Areas\\Manage\\Views\\Auth\\CreateAdmin.cshtml",
+              "ToolTip": "C:\\Users\\ummanmm\\Desktop\\MVC\\Project\\Project\\Areas\\Manage\\Views\\Auth\\CreateAdmin.cshtml",
+              "RelativeToolTip": "Project\\Areas\\Manage\\Views\\Auth\\CreateAdmin.cshtml",
+              "ViewState": "AQIAAGYAAAAAAAAAAAAowOcAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-22T17:01:05.042Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\ummanmm\\Desktop\\MVC\\Project\\Project\\Areas\\Manage\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Project\\Areas\\Manage\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\ummanmm\\Desktop\\MVC\\Project\\Project\\Areas\\Manage\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Project\\Areas\\Manage\\Controllers\\AuthController.cs",
+              "ViewState": "AQIAAFsAAAAAAAAAAAAAAGoAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-22T17:00:32.869Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

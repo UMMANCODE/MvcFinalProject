@@ -6,207 +6,247 @@ using Project.Models;
 using Project.Services;
 using Project.ViewModels;
 
-namespace Project.Controllers {
-	public class AuthController : Controller {
-		private readonly UserManager<AppUser> _userManager;
-		private readonly SignInManager<AppUser> _signInManager;
-		private readonly EmailService _emailService;
+namespace Project.Controllers
+{
+    public class AuthController : Controller
+    {
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly EmailService _emailService;
 
-		public AuthController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, EmailService emailService) {
-			_userManager = userManager;
-			_signInManager = signInManager;
-			_emailService = emailService;
-		}
-		public IActionResult Login() {
-			return View();
-		}
+        public AuthController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, EmailService emailService)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _emailService = emailService;
+        }
+        public IActionResult Login()
+        {
+            return View();
+        }
 
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Login(UserLoginViewModel userLoginViewModel) {
-			if (ModelState.IsValid) {
-				var result = await _signInManager.PasswordSignInAsync(userLoginViewModel.UserName, userLoginViewModel.Password, userLoginViewModel.RememberMe, false);
-				if (result.Succeeded) {
-					return RedirectToAction("Index", "Home");
-				}
-				ModelState.AddModelError("", "Invalid login attempt.");
-			}
-			return View(userLoginViewModel);
-		}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(UserLoginViewModel userLoginViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByNameAsync(userLoginViewModel.UserName);
+                if (user != null && await _userManager.IsInRoleAsync(user, "user") 
+                    && !await _userManager.IsEmailConfirmedAsync(user)
+                    && (await _userManager.CheckPasswordAsync(user, userLoginViewModel.Password)))
+                {
+                    return RedirectToAction("VerifyEmailGet", "Auth", new { email = user.Email });
+                }
+                var result = await _signInManager.PasswordSignInAsync(userLoginViewModel.UserName, userLoginViewModel.Password, userLoginViewModel.RememberMe, false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                ModelState.AddModelError("", "Invalid login attempt.");
+            }
+            return View(userLoginViewModel);
+        }
 
-		public IActionResult Register() {
-			return View();
-		}
+        public IActionResult Register()
+        {
+            return View();
+        }
 
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Register(UserRegisterViewModel userRegisterViewModel) {
-			if (ModelState.IsValid) {
-				var user = new AppUser {
-					UserName = userRegisterViewModel.UserName,
-					Email = userRegisterViewModel.EmailAddress,
-					FullName = userRegisterViewModel.FullName
-				};
-				var result = await _userManager.CreateAsync(user, userRegisterViewModel.Password);
-				if (result.Succeeded) {
-					await _userManager.AddToRoleAsync(user, "user");
-					TempData["Email"] = user.Email;
-					return RedirectToAction("VerifyEmail", "Auth");
-				}
-				foreach (var error in result.Errors) {
-					ModelState.AddModelError("", error.Description);
-				}
-			}
-			return View(userRegisterViewModel);
-		}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(UserRegisterViewModel userRegisterViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new AppUser
+                {
+                    UserName = userRegisterViewModel.UserName,
+                    Email = userRegisterViewModel.EmailAddress,
+                    FullName = userRegisterViewModel.FullName
+                };
+                var result = await _userManager.CreateAsync(user, userRegisterViewModel.Password);
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, "user");
+                    TempData["Email"] = user.Email;
+                    return RedirectToAction("VerifyEmail", "Auth");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+            return View(userRegisterViewModel);
+        }
 
-		[Authorize(Roles = "user")]
-		public async Task<IActionResult> Logout() {
-			await _signInManager.SignOutAsync();
-			return RedirectToAction("Index", "Home");
-		}
+        [Authorize(Roles = "user")]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
 
-		public IActionResult ForgetPassword() {
-			return View();
-		}
+        public IActionResult ForgetPassword()
+        {
+            return View();
+        }
 
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> ForgetPassword(ForgetPasswordViewModel forgetPasswordVM) {
-			if (!ModelState.IsValid) return View(forgetPasswordVM);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgetPassword(ForgetPasswordViewModel forgetPasswordVM)
+        {
+            if (!ModelState.IsValid) return View(forgetPasswordVM);
 
-			AppUser? user = await _userManager.FindByEmailAsync(forgetPasswordVM.Email);
+            AppUser? user = await _userManager.FindByEmailAsync(forgetPasswordVM.Email);
 
-			if (user == null || !await _userManager.IsInRoleAsync(user, "user")) {
-				ModelState.AddModelError("", "Account is not exist");
-				return View();
-			}
+            if (user == null || !await _userManager.IsInRoleAsync(user, "user"))
+            {
+                ModelState.AddModelError("", "Account is not exist");
+                return View();
+            }
 
-			var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
 
-			var fullName = user.FullName;
-			var url = Url.Action("verify", "auth", new { email = forgetPasswordVM.Email, token = resetToken }, Request.Scheme);
-			TempData["EmailSent"] = forgetPasswordVM.Email;
+            var fullName = user.FullName;
+            var url = Url.Action("verify", "auth", new { email = forgetPasswordVM.Email, token = resetToken }, Request.Scheme);
+            TempData["EmailSent"] = forgetPasswordVM.Email;
 
-			var subject = "Reset Password Link";
-			var body = EmailTemplates.GetResetPassword(fullName, url);
+            var subject = "Reset Password Link";
+            var body = EmailTemplates.GetResetPassword(fullName, url);
 
-			_emailService.Send(user.Email, subject, body);
+            _emailService.Send(user.Email, subject, body);
 
-			return View();
-		}
+            return View();
+        }
 
-		public async Task<IActionResult> Verify(string email, string token) {
-			AppUser? user = _userManager.FindByEmailAsync(email).Result;
+        public async Task<IActionResult> Verify(string email, string token)
+        {
+            AppUser? user = _userManager.FindByEmailAsync(email).Result;
 
-			if (user == null || !await _userManager.IsInRoleAsync(user, "user")) {
-				return RedirectToAction("notfound", "error");
-			}
+            if (user == null || !await _userManager.IsInRoleAsync(user, "user"))
+            {
+                return RedirectToAction("notfound", "error");
+            }
 
-			if (!await _userManager.VerifyUserTokenAsync(user, _userManager.Options.Tokens.PasswordResetTokenProvider, "ResetPassword", token)) {
-				return RedirectToAction("notfound", "error");
-			}
+            if (!await _userManager.VerifyUserTokenAsync(user, _userManager.Options.Tokens.PasswordResetTokenProvider, "ResetPassword", token))
+            {
+                return RedirectToAction("notfound", "error");
+            }
 
-			TempData["email"] = email;
-			TempData["token"] = token;
+            TempData["email"] = email;
+            TempData["token"] = token;
 
-			return RedirectToAction("ResetPassword");
-		}
+            return RedirectToAction("ResetPassword");
+        }
 
-		public IActionResult ResetPassword() {
-			return View();
-		}
+        public IActionResult ResetPassword()
+        {
+            return View();
+        }
 
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> ResetPassword(ResetPasswordViewModel resetPasswordVM) {
-			TempData["email"] = resetPasswordVM.Email;
-			TempData["token"] = resetPasswordVM.Token;
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel resetPasswordVM)
+        {
+            TempData["email"] = resetPasswordVM.Email;
+            TempData["token"] = resetPasswordVM.Token;
 
-			if (!ModelState.IsValid) return View(resetPasswordVM);
+            if (!ModelState.IsValid) return View(resetPasswordVM);
 
-			AppUser? user = await _userManager.FindByEmailAsync(resetPasswordVM.Email);
+            AppUser? user = await _userManager.FindByEmailAsync(resetPasswordVM.Email);
 
-			if (user == null || !await _userManager.IsInRoleAsync(user, "user")) {
-				ModelState.AddModelError("", "Account is not exist");
-				return View();
-			}
+            if (user == null || !await _userManager.IsInRoleAsync(user, "user"))
+            {
+                ModelState.AddModelError("", "Account is not exist");
+                return View();
+            }
 
-			if (!await _userManager.VerifyUserTokenAsync(user, _userManager.Options.Tokens.PasswordResetTokenProvider, "ResetPassword", resetPasswordVM.Token)) {
-				ModelState.AddModelError("", "Account is not exist");
-				return View();
-			}
+            if (!await _userManager.VerifyUserTokenAsync(user, _userManager.Options.Tokens.PasswordResetTokenProvider, "ResetPassword", resetPasswordVM.Token))
+            {
+                ModelState.AddModelError("", "Account is not exist");
+                return View();
+            }
 
-			var result = await _userManager.ResetPasswordAsync(user, resetPasswordVM.Token, resetPasswordVM.NewPassword);
+            var result = await _userManager.ResetPasswordAsync(user, resetPasswordVM.Token, resetPasswordVM.NewPassword);
 
-			if (!result.Succeeded) {
-				foreach (var item in result.Errors) {
-					ModelState.AddModelError("", item.Description);
-				}
-				return View();
-			}
+            if (!result.Succeeded)
+            {
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError("", item.Description);
+                }
+                return View();
+            }
 
-			return RedirectToAction("login");
-		}
+            return RedirectToAction("login");
+        }
 
-		public IActionResult VerifyEmail() {
-			return View();
-		}
+        public IActionResult VerifyEmail()
+        {
+            return View();
+        }
 
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> VerifyEmail(string email) {
-			var user = await _userManager.FindByEmailAsync(email);
-			if (user == null) {
-				return RedirectToAction("NotFound", "Error");
-			}
-			var fullName = user.FullName;
-			var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-			var confirmationLink = Url.Action("ConfirmEmail", "Auth", new { email, token }, Request.Scheme);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> VerifyEmail(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+            var fullName = user.FullName;
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var confirmationLink = Url.Action("ConfirmEmail", "Auth", new { email, token }, Request.Scheme);
 
-			var subject = "Confirm Your Email";
-			var body = EmailTemplates.GetVerifyEmail(fullName, confirmationLink);
-			_emailService.Send(email, subject, body);
+            var subject = "Confirm Your Email";
+            var body = EmailTemplates.GetVerifyEmail(fullName, confirmationLink);
+            _emailService.Send(email, subject, body);
 
-			TempData["EmailSent"] = email;
+            TempData["EmailSent"] = email;
 
-			return View();
-		}
+            return View();
+        }
 
-		[HttpGet]
-		[Authorize(Roles = "user")]
-		public async Task<IActionResult> VerifyEmailGet() {
-			var user = await _userManager.GetUserAsync(User);
-			if (user == null) {
-				return RedirectToAction("NotFound", "Error");
-			}
-			var fullName = user.FullName;
-			var email = user.Email;
-			var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-			var confirmationLink = Url.Action("ConfirmEmail", "Auth", new { email, token }, Request.Scheme);
+        [HttpGet]
+        public async Task<IActionResult> VerifyEmailGet(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+            var fullName = user.FullName;
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var confirmationLink = Url.Action("ConfirmEmail", "Auth", new { email, token }, Request.Scheme);
 
-			var subject = "Confirm Your Email";
-			var body = EmailTemplates.GetVerifyEmail(fullName, confirmationLink);
-			_emailService.Send(email, subject, body);
+            var subject = "Confirm Your Email";
+            var body = EmailTemplates.GetVerifyEmail(fullName, confirmationLink);
+            _emailService.Send(email, subject, body);
 
-			TempData["EmailSent"] = email;
+            TempData["EmailSent"] = email;
 
-			return View("VerifyEmail");
-		}
+            return View("VerifyEmail");
+        }
 
-		public async Task<IActionResult> ConfirmEmail(string email, string token) {
-			var user = await _userManager.FindByEmailAsync(email);
-			if (user == null) {
-				return RedirectToAction("NotFound", "Error");
-			}
+        public async Task<IActionResult> ConfirmEmail(string email, string token)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
 
-			var result = await _userManager.ConfirmEmailAsync(user, token);
-			if (result.Succeeded) {
-				return RedirectToAction("Login");
-			}
-			else {
-				return RedirectToAction("Error");
-			}
-		}
-	}
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+        }
+    }
 }

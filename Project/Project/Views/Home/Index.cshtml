@@ -6,7 +6,8 @@
 <!-- Background Area Start -->
 <section id="slider-container" class="slider-area">
 	<div class="slider-owl owl-theme owl-carousel">
-		@foreach (var slider in Model.Sliders) {
+		@foreach (var slider in Model.Sliders)
+		{
 			<!-- Start Slingle Slide -->
 			<div class="single-slide item" style="background-image: url('/img/slider/@slider.ImageName')">
 				<!-- Start Slider Content -->
@@ -39,7 +40,8 @@
 			<div class="col-md-6 col-sm-6 col-xs-12">
 				<div class="notice-left">
 					<h3>notice board</h3>
-					@for (int i = 0; i < Model.Notices.Count; i++) {
+					@for (int i = 0; i < Model.Notices.Count; i++)
+					{
 						<div class='single-notice-left @(i % 3 == 2 ? "pb-70": "mb-25 pb-25")'>
 							<h4>@Model.Notices[i].Date.ToString("d, MMMM yyyy")</h4>
 							<p>@Model.Notices[i].Topic</p>
@@ -48,7 +50,8 @@
 				</div>
 			</div>
 			<div class="notice-right">
-				@for (int i = 0; i < Model.Features.Count; i++) {
+				@for (int i = 0; i < Model.Features.Count; i++)
+				{
 					<div class='single-notice-right @(i % 3 == 2 ? "" : "mb-25 pb-25")'>
 						<h3>@Model.Features[i].Title</h3>
 						<p>@Model.Features[i].Description</p>
@@ -65,10 +68,9 @@
 		<div class="row">
 			<div class="col-md-8 col-md-offset-left-4 col-sm-8 col-md-offset-left-4">
 				<div class="choose-content text-left">
-					<h2>WHY YOU CHOOSE EDUHOME ?</h2>
-					<p>I must explain to you how all this mistaken idea of denouncing pleure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings  the master-builder of humanit happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because. </p>
-					<p class="choose-option">I must explain to you how all this mistaken idea of denouncing pleure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings  the master-builder. </p>
-					<a class="default-btn" href="course-details.html">view courses</a>
+					<h2>@settings["HomeChooseTitle"]</h2>
+					<p>@settings["HomeChooseText"]</p>
+					<a class="default-btn" asp-action="index" asp-controller="course">view courses</a>
 				</div>
 			</div>
 		</div>
@@ -87,11 +89,12 @@
 			</div>
 		</div>
 		<div class="row">
-			@for (int i = 0; i < Model.Courses.Count; i++) {
+			@for (int i = 0; i < Model.Courses.Count; i++)
+			{
 				<div class='col-md-4 @(i % 3 == 2 ? "hidden-sm": "col-sm-6") col-sm-6 col-xs-12'>
 					<div class="single-course">
 						<div class="course-img">
-							<a href="course-details.html">
+							<a asp-controller="course" asp-action="details" asp-route-id="@Model.Courses[i].Id">
 								<img src="~/img/course/@Model.Courses[i].ImageName" alt="course">
 								<div class="course-hover">
 									<i class="fa fa-link"></i>
@@ -123,7 +126,8 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6 col-sm-12 col-xs-12">
-				@for (int i = 0; i < Model.Events.Count / 2; i++) {
+				@for (int i = 0; i < Model.Events.Count / 2; i++)
+				{
 					<div class='single-event @(i % 4 == 3 ? "" : "mb-35")'>
 						<div class="event-date">
 							<h3><a asp-action="details" asp-controller="event" asp-route-id="@Model.Events[i].Id">@Model.Events[i].StartDate.Day <span>@Model.Events[i].StartDate.ToString("MMMM")</span></a></h3>
@@ -144,7 +148,8 @@
 				}
 			</div>
 			<div class="col-md-6 hidden-sm hidden-xs">
-				@for (int i = Model.Events.Count / 2; i < Model.Events.Count; i++) {
+				@for (int i = Model.Events.Count / 2; i < Model.Events.Count; i++)
+				{
 					<div class='single-event @(i % 4 == 3 ? "" : "mb-35")'>
 						<div class="event-date">
 							<h3><a asp-action="details" asp-controller="event" asp-route-id="@Model.Events[i].Id">@Model.Events[i].StartDate.Day <span>@Model.Events[i].StartDate.ToString("MMMM")</span></a></h3>
@@ -173,7 +178,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="testimonial-owl owl-theme owl-carousel">
-				@foreach (var testimonial in Model.Testimonials) {
+				@foreach (var testimonial in Model.Testimonials)
+				{
 					<div class="col-md-8 col-md-offset-2 col-sm-12">
 						<div class="single-testimonial">
 							<div class="testimonial-info">
@@ -206,11 +212,12 @@
 			</div>
 		</div>
 		<div class="row">
-			@for (int i = 0; i < Model.Blogs.Count; i++) {
+			@for (int i = 0; i < Model.Blogs.Count; i++)
+			{
 				<div class='col-md-4 @(i % 3 == 2 ? "hidden-sm" : "col-sm-6") col-xs-12'>
 					<div class="single-blog">
 						<div class="blog-img">
-							<a href="blog-details.html"><img src="~/img/blog/@Model.Blogs[i].ImageName" alt="blog"></a>
+							<a asp-action="details" asp-controller="blog" asp-route-id="@Model.Blogs[i].Id"><img src="~/img/blog/@Model.Blogs[i].ImageName" alt="blog"></a>
 							<div class="blog-hover">
 								<a asp-action="details" asp-controller="blog" asp-route-id="@Model.Blogs[i].Id"><i class="fa fa-link"></i></a>
 							</div>

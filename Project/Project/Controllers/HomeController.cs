@@ -36,6 +36,7 @@ namespace Project.Controllers {
 				.ThenInclude(ti => ti.Icon)
 				.Take(4).ToList(),
 				Notices = _context.Notices.ToList(),
+				Testimonials = _context.Testimonials.OrderBy(x => x.Order).ToList()
 			};
 			return View(aboutViewModel);
 		}
