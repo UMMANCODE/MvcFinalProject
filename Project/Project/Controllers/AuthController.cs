@@ -173,6 +173,27 @@ namespace Project.Controllers {
 			return View();
 		}
 
+		[HttpGet]
+		[Authorize(Roles = "user")]
+		public async Task<IActionResult> VerifyEmailGet() {
+			var user = await _userManager.GetUserAsync(User);
+			if (user == null) {
+				return RedirectToAction("NotFound", "Error");
+			}
+			var fullName = user.FullName;
+			var email = user.Email;
+			var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+			var confirmationLink = Url.Action("ConfirmEmail", "Auth", new { email, token }, Request.Scheme);
+
+			var subject = "Confirm Your Email";
+			var body = EmailTemplates.GetVerifyEmail(fullName, confirmationLink);
+			_emailService.Send(email, subject, body);
+
+			TempData["EmailSent"] = email;
+
+			return View("VerifyEmail");
+		}
+
 		public async Task<IActionResult> ConfirmEmail(string email, string token) {
 			var user = await _userManager.FindByEmailAsync(email);
 			if (user == null) {
