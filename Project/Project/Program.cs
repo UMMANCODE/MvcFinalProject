@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<StaticService>();
+builder.Services.AddScoped<EmailService>();
 
 builder.Services.AddDbContext<AppDbContext>(options => {
 	options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));

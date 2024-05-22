@@ -13,7 +13,7 @@
 
 	<link rel="apple-touch-icon" href="apple-touch-icon.png">
 	<!-- Place favicon.ico in the root directory -->
-
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<link rel="stylesheet" href="~/css/bootstrap.min.css">
 	<link rel="stylesheet" href="~/css/animate.css">
 	<link rel="stylesheet" href="~/css/meanmenu.css">
@@ -103,12 +103,10 @@
 									</ul>
 									<div class="search">
 										<div class="search-form">
-											<form id="search-form" action="#">
-												<input type="search" placeholder="Search here..." name="search">
-												<button type="submit">
-													<span><i class="fa fa-search"></i></span>
-												</button>
-											</form>
+											<input class="search-input" type="search" placeholder="Search here..." name="search">
+											<ul class="list-group search-results">
+
+											</ul>
 										</div>
 									</div>
 								</div>
@@ -136,14 +134,13 @@
 						<p>@settings["SubscribeText"] </p>
 					</div>
 					<div class="newsletter-form mc_embed_signup">
-						<form action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-							<div id="mc_embed_signup_scroll" class="mc-form">
-								<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your e-mail address" required>
-								<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-								<div class="mc-news" aria-hidden="true"><input type="text" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" tabindex="-1" value=""></div>
-								<button id="mc-embedded-subscribe" class="default-btn" type="submit" name="subscribe"><span>subscribe</span></button>
+						<form method="post" asp-action="subscribe" asp-controller="home" id="Subscribe-Form">
+							<div class="form">
+								<input type="email" name="Email" id="EmailAddress-Input" placeholder="Enter your e-mail address">
+								<button type="submit" id="Subscribe-Btn" class="default-btn" type="submit">subscribe</button>
 							</div>
 						</form>
+						<h3>@TempData["error"]</h3>
 						<!-- mailchimp-alerts Start -->
 						<div class="mailchimp-alerts">
 							<div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
@@ -225,6 +222,10 @@
 	</footer>
 	<!-- Footer End -->
 
+	<!-- Toast -->
+	@Html.Partial("_ToastPartial")
+
+	<!-- Scripts -->
 	<script src="~/js/vendor/jquery-1.12.0.min.js"></script>
 	<script src="~/js/bootstrap.min.js"></script>
 	<script src="~/js/jquery.meanmenu.js"></script>
@@ -235,6 +236,8 @@
 	<script src="~/js/jquery.nicescroll.min.js"></script>
 	<script src="~/js/plugins.js"></script>
 	<script src="~/js/main.js"></script>
+	<script src="~/js/custom.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	@RenderSection("Scripts", required: false)
 </body>
 </html>

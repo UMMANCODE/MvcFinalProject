@@ -520,3 +520,12 @@ VALUES
   ('This platform has significantly boosted my career. The courses are comprehensive and up-to-date.', 'John Doe', 'Software Engineer', 'testimonial1.jpg', 1),
   ('The learning experience here is fantastic! The instructors are very knowledgeable.', 'Jane Smith', 'Data Scientist', 'testimonial2.jpg', 2),
   ('I highly recommend this to anyone looking to advance their skills. It has been a game changer for me.', 'Alice Johnson', 'Product Manager', 'testimonial3.jpg', 3);
+
+
+-- Inserting 3 random branch entries
+  INSERT INTO Branches (Title, Address1, Address2, ImageName)
+VALUES 
+('BranchTitle1', '123 Main St', 'Suite 100', 'contact1.png'),
+('BranchTitle2', '456 Elm St', 'Suite 200', 'contact2.png'),
+('BranchTitle3', '789 Oak St', 'Suite 300', 'contact3.png');
+

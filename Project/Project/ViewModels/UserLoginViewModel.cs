@@ -9,6 +9,7 @@ namespace Project.ViewModels {
 		[Required]
 		[MinLength(8)]
 		[MaxLength(50)]
+		[DataType(DataType.Password)]
 		public string Password { get; set; }
 		public bool RememberMe { get; set; }
 	}

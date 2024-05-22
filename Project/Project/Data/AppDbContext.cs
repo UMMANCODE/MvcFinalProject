@@ -28,7 +28,9 @@ namespace MvcPustok.Data {
 		public DbSet<Post> Posts { get; set; }
 		public DbSet<Settings> Settings { get; set; }
 		public DbSet<Application> Applications { get; set; }
-		public DbSet<AppUserApplications> AppUserApplications { get; set; }
+		public DbSet<Branch> Branches { get; set; }
+		public DbSet<Contact> Contacts { get; set; }
+		public DbSet<Subscriber> Subscribers { get; set; }
 
 		override protected void OnModelCreating(ModelBuilder modelBuilder) {
 			base.OnModelCreating(modelBuilder);

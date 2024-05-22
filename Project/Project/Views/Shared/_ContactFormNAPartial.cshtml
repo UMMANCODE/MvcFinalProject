@@ -1,0 +1,28 @@
+﻿@model ContactFormViewModel
+<div class="reply-area">
+	<h3>LEAVE A message</h3>
+	<form id="contact-form" asp-action="sendmessage" asp-controller="home" method="post">
+		<div class="row">
+			<div class="col-md-12">
+				<label asp-for="Name">Name</label>
+				<input asp-for="Name" id="Name">
+				<span class="text-danger" asp-validation-for="Name"></span>
+			</div>
+			<div class="col-md-12">
+				<label asp-for="Email">Email</label>
+				<input asp-for="Email" id="Email">
+				<span class="text-danger" asp-validation-for="Email"></span>
+			</div>
+			<div class="col-md-12">
+				<label asp-for="Subject">Subject</label>
+				<input asp-for="Subject" id="Subject">
+				<span class="text-danger" asp-validation-for="Subject"></span>
+				<label asp-for="Message">Message</label>
+				<textarea cols="15" rows="10" asp-for="Message" id="Message"></textarea>
+				<span class="text-danger" asp-validation-for="Message"></span>
+			</div>
+		</div>
+		@*<a class="reply-btn" asp-action="contact" asp-controller="home" asp-route-id="@Model.CourseId">Send Message</a>*@
+		<button type="submit" class="reply-btn btn btn-primary">Send Message</button>
+	</form>
+</div>

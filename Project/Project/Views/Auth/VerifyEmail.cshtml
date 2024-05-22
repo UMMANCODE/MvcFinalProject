@@ -1,0 +1,49 @@
+﻿@model ForgetPasswordViewModel
+<!-- Banner Area Start -->
+<div class="banner-area-wrapper">
+	<div class="banner-area text-center">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="banner-content-wrapper">
+						<div class="banner-content">
+							<h2>verify email</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Banner Area End -->
+<!-- Verify Email start -->
+<div class="login-area pt-150 pb-150">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3 text-center">
+				@if (TempData["EmailSent"] == null) {
+					<div class="login">
+						<div class="login-form-container">
+							<div class="login-text">
+								<h2>verify email</h2>
+								<span>Please click the button below to verify your email address </span>
+								<div class="login-form">
+									<form method="post">
+										<input type="hidden" name="email" value="@TempData["Email"]" />
+										<div class="button-box">
+											<button type="submit" class="default-btn">Verify Email</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				}
+				else {
+					<h1 class="text-success">Check your email box to verify email address</h1>
+				}
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Verify Email end -->

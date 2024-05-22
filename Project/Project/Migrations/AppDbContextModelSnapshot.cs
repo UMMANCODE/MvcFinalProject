@@ -229,30 +229,6 @@ namespace Project.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Project.Models.AppUserApplications", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AppUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ApplicationId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("ApplicationId");
-
-                    b.ToTable("AppUserApplications");
-                });
-
             modelBuilder.Entity("Project.Models.Application", b =>
                 {
                     b.Property<int>("Id")
@@ -261,20 +237,31 @@ namespace Project.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("Type")
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("CourseId");
 
                     b.ToTable("Applications");
                 });
@@ -342,6 +329,38 @@ namespace Project.Migrations
                     b.ToTable("BlogTags");
                 });
 
+            modelBuilder.Entity("Project.Models.Branch", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address1")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
+                    b.Property<string>("Address2")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
+                    b.Property<string>("ImageName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Branches");
+                });
+
             modelBuilder.Entity("Project.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -358,6 +377,45 @@ namespace Project.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Project.Models.Contact", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("Project.Models.Course", b =>
@@ -722,6 +780,23 @@ namespace Project.Migrations
                     b.ToTable("Sliders");
                 });
 
+            modelBuilder.Entity("Project.Models.Subscriber", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Subscribers");
+                });
+
             modelBuilder.Entity("Project.Models.Tag", b =>
                 {
                     b.Property<int>("Id")
@@ -934,23 +1009,21 @@ namespace Project.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Project.Models.AppUserApplications", b =>
+            modelBuilder.Entity("Project.Models.Application", b =>
                 {
                     b.HasOne("Project.Models.AppUser", "AppUser")
-                        .WithMany("AppUserApplications")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("AppUserId");
 
-                    b.HasOne("Project.Models.Application", "Application")
-                        .WithMany("AppUserApplications")
-                        .HasForeignKey("ApplicationId")
+                    b.HasOne("Project.Models.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("AppUser");
 
-                    b.Navigation("Application");
+                    b.Navigation("Course");
                 });
 
             modelBuilder.Entity("Project.Models.Blog", b =>
@@ -981,6 +1054,15 @@ namespace Project.Migrations
                     b.Navigation("Blog");
 
                     b.Navigation("Tag");
+                });
+
+            modelBuilder.Entity("Project.Models.Contact", b =>
+                {
+                    b.HasOne("Project.Models.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId");
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Project.Models.Course", b =>
@@ -1100,11 +1182,6 @@ namespace Project.Migrations
                     b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("Project.Models.Application", b =>
-                {
-                    b.Navigation("AppUserApplications");
-                });
-
             modelBuilder.Entity("Project.Models.Blog", b =>
                 {
                     b.Navigation("BlogTags");
@@ -1147,11 +1224,6 @@ namespace Project.Migrations
                     b.Navigation("TeacherIcons");
 
                     b.Navigation("TeacherSkills");
-                });
-
-            modelBuilder.Entity("Project.Models.AppUser", b =>
-                {
-                    b.Navigation("AppUserApplications");
                 });
 #pragma warning restore 612, 618
         }
