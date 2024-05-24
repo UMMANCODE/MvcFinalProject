@@ -17,5 +17,7 @@ namespace Project.Models {
 		public AppUser? AppUser { get; set; }
 		[Actual]
 		public DateTime CreatedAt { get; set; } = DateTime.Now;
-	}
+		[Actual]
+		public DateTime UpdatedAt { get; set; } = DateTime.Now;
+  }
 }

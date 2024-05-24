@@ -39,6 +39,64 @@ function handleClickTag(event, controllerName, tagId) {
 */
 
 $(document).ready(function () {
+
+  function loadMoreHandler(e) {
+    e.preventDefault();
+
+    // Get the count of existing review comments
+    const replyBoxesCount = document.querySelectorAll(".review-comment").length;
+
+    // Construct the URL for fetching more data
+    let url = window.location.href;
+    url = url.replace("details", "loadmore");
+    url += `?skip=${replyBoxesCount}`;
+
+    // Fetch more data
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        const total = data.replyCount;
+        const replies = data.replies;
+
+        // Process fetched data
+        replies.forEach(reply => {
+          const replyBox = `
+                    <div class="review-comment mb-2">
+                        <div class="text">
+                            <h6 class="author">
+                                ${reply.fullName} – <span class="font-weight-400">${formatDate(reply.createdAt)}</span>
+                            </h6>
+                            <p>
+                                ${reply.message}
+                            </p>
+                        </div>
+                    </div>`;
+          const replyContainer = document.querySelector(".review-container");
+          replyContainer.innerHTML += replyBox;
+        });
+
+        // Check if all data has been loaded
+        if (total <= replyBoxesCount + replies.length) {
+          // Hide the load more button if all data has been loaded
+          document.querySelector("#load-more-btn").style.display = "none";
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
+
+  // Attach the click event handler for the load more button
+  $("#load-more-btn").click(loadMoreHandler);
+
+  // If the event was attached multiple times, detach it before attaching it again
+  $("#load-more-btn").off("click").on("click", loadMoreHandler);
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  }
+
   const input = $('.search-form .search-input');
   const ul = $('.search-form .search-results');
   const url = '/Home/SearchAutocomplete';

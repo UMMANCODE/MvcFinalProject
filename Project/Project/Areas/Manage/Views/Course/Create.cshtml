@@ -1,0 +1,77 @@
+﻿@model Course
+@{
+  TempData["Page"] = "Create";
+}
+<form method="post" class="col-md-6 mx-auto" enctype="multipart/form-data">
+  <div class="form-group">
+    <input asp-for="Name" class="form-control" id="Name" placeholder="Name">
+    <span class="text-danger" asp-validation-for="Name"></span>
+  </div>
+  <div class="form-group">
+    <input asp-for="Description" class="form-control" id="Description" placeholder="Description">
+    <span class="text-danger" asp-validation-for="Description"></span>
+  </div>
+    <div class="form-group">
+    <label asp-for="CategoryId">Category Id</label>
+    <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
+    <span class="text-danger" asp-validation-for="CategoryId"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="TagIds">CourseTags</label>
+    <select asp-for="TagIds" class="form-control" id="TagIds" asp-items="ViewBag.Tags"></select>
+    <span class="text-danger" asp-validation-for="TagIds"></span>
+  </div>
+  <div class="form-group">
+    <input asp-for="About" class="form-control" id="About" placeholder="About">
+    <span class="text-danger" asp-validation-for="About"></span>
+  </div>
+  <div class="form-group">
+    <input asp-for="HowToApply" class="form-control" id="HowToApply" placeholder="HowToApply">
+    <span class="text-danger" asp-validation-for="HowToApply"></span>
+  </div>
+  <div class="form-group">
+    <input asp-for="Certification" class="form-control" id="Certification" placeholder="Certification">
+    <span class="text-danger" asp-validation-for="Certification"></span>
+  </div>
+  <div class="form-group">
+    <input asp-for="StartDate" class="form-control" id="StartDate" placeholder="StartDate">
+    <span class="text-danger" asp-validation-for="StartDate"></span>
+  </div>
+  <div class="form-group">
+    <input asp-for="Duration" class="form-control" id="Duration" placeholder="Duration">
+    <span class="text-danger" asp-validation-for="Duration"></span>
+  </div>
+  <div class="form-group">
+    <input asp-for="ClassDuration" class="form-control" id="ClassDuration" placeholder="ClassDuration">
+    <span class="text-danger" asp-validation-for="ClassDuration"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="SkillLevel">Skill Level</label>
+    <select asp-for="SkillLevel" class="form-control" asp-items="ViewBag.SkillLevels"></select>
+    <span class="text-danger" asp-validation-for="SkillLevel"></span>
+  </div>
+  <div class="form-group">
+    <input asp-for="Language" class="form-control" id="Language" placeholder="Language">
+    <span class="text-danger" asp-validation-for="Language"></span>
+  </div>
+  <div class="form-group">
+    <input asp-for="StudentCount" class="form-control" id="StudentCount" placeholder="StudentCount">
+    <span class="text-danger" asp-validation-for="StudentCount"></span>
+  </div>
+  <div class="form-group">
+    <input asp-for="Price" class="form-control" id="Price" placeholder="Price">
+    <span class="text-danger" asp-validation-for="Price"></span>
+  </div>
+  <div class="form-group">
+    <input asp-for="ImageFile" class="form-control imgInput" placeholder="Image">
+    <div class="preview-box">
+      <img width="200" class="previewImg" />
+    </div>
+    <span class="text-danger" asp-validation-for="ImageFile"></span>
+  </div>
+  <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+@section Scripts {
+  <script src="~/manage/js/custom.js"></script>
+}

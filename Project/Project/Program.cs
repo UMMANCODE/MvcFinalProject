@@ -11,7 +11,7 @@ builder.Services.AddScoped<StaticService>();
 builder.Services.AddScoped<EmailService>();
 
 builder.Services.AddDbContext<AppDbContext>(options => {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Code"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Home"));
 });
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(opt => {

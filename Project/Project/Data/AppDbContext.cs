@@ -31,8 +31,9 @@ namespace MvcPustok.Data {
 		public DbSet<Branch> Branches { get; set; }
 		public DbSet<Contact> Contacts { get; set; }
 		public DbSet<Subscriber> Subscribers { get; set; }
+    public DbSet<Reply> Replies { get; set; }
 
-		override protected void OnModelCreating(ModelBuilder modelBuilder) {
+    override protected void OnModelCreating(ModelBuilder modelBuilder) {
 			base.OnModelCreating(modelBuilder);
 		}
 	}

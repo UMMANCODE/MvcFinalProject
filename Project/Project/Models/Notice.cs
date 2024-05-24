@@ -8,6 +8,7 @@ namespace Project.Models {
 		public string Topic { get; set; }
 		[Required]
 		[Actual]
+		[DataType(DataType.Date)]
 		public DateTime Date { get; set; }
 	}
 }

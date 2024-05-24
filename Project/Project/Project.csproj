@@ -231,6 +231,9 @@
     <None Include="wwwroot\manage\scss\soft-ui-dashboard\_utilities-extend.scss" />
     <None Include="wwwroot\manage\scss\soft-ui-dashboard\_utilities.scss" />
     <None Include="wwwroot\manage\scss\soft-ui-dashboard\_variables.scss" />
+    <None Include="wwwroot\pustok\js\ajax-mail.js" />
+    <None Include="wwwroot\pustok\js\custom.js" />
+    <None Include="wwwroot\pustok\js\plugins.js" />
   </ItemGroup>
 
 </Project>

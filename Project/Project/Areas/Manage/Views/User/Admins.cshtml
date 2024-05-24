@@ -1,0 +1,73 @@
+﻿@model PaginatedList<AdminsWithRolesViewModel>
+@{
+  TempData["Page"] = "Admin";
+  int order = (Model.PageIndex - 1) * Model.PageSize;
+}
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h6>@(TempData["Page"])s table</h6>
+        </div>
+        <div class="card-header pb-0">
+          <a asp-action="createadmin" asp-controller="auth" class="btn btn-primary">Create Admin</a>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">UserName</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">FullName</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Email</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Role</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach (var item in Model.Items) {
+                  <tr>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                          <h6 class="mb-0 text-sm">@(++order)</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0">@item.Admin.UserName</p>
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0">@item.Admin.FullName</p>
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0">@item.Admin.Email</p>
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0">
+                        @foreach (var role in item.Roles) {
+                          @role <br />
+                        }
+                      </p>
+                    </td>
+                    <td class="align-middle text-center">
+                      <a asp-action="admindetails" asp-controller="user" asp-route-id="@item.Admin.Id" class="btn btn-success">Details</a>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    @Html.Partial("_PaginatedListPartial", Model)
+  </div>
+</div>
+
+@section Scripts {
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="~/manage/js/custom.js"></script>
+}

@@ -1,10 +1,10 @@
 ﻿<div class="row">
 	<div class="col-md-auto">
 		<nav aria-label="Pagination" style="text-align: center;">
-			<ul class="pagination" style="display: inline-block;">
+			<ul class="pagination d-flex" style="display: inline-block;">
 				@if (Model.PageIndex > 1) {
 					<li class="page-item">
-						<a class="page-link" style="color: white;" asp-route-page="@(Model.PageIndex - 1)">Previous</a>
+						<a class="page-link" style="color: white;" asp-route-page="@(Model.PageIndex - 1)">Prev</a>
 					</li>
 				}
 

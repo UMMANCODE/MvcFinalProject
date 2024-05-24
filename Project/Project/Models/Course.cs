@@ -20,6 +20,7 @@ namespace Project.Models {
 		public string? Certification { get; set; }
 		[Required]
 		[Actual]
+		[DataType(DataType.Date)]
 		public DateTime StartDate { get; set; }
 		[Required]
 		public int Duration { get; set; }
@@ -43,6 +44,8 @@ namespace Project.Models {
 		public int CategoryId { get; set; }
 		public Category? Category { get; set; }
 		public List<CourseTags>? CourseTags { get; set; } = new();
-	}
+    [NotMapped]
+    public List<int>? TagIds { get; set; } = new();
+  }
 }
 

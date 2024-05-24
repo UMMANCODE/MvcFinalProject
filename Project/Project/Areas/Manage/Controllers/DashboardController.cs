@@ -1,15 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MvcPustok.Data;
 
-namespace Project.Areas.Manage.Controllers
-{
-    [Area("Manage")]
-    public class DashboardController : Controller
-    {
-        // [Authorize(Roles = "superadmin admin")]
-        public IActionResult Index()
-        {
-            return View();
-        }
-    }
+namespace Project.Areas.Manage.Controllers {
+	[Area("Manage")]
+  // [Authorize(Roles = "superadmin, admin")]
+  public class DashboardController : Controller {
+		public IActionResult Index() {
+			return View();
+		}
+	}
 }

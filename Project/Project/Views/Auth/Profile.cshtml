@@ -1,0 +1,149 @@
+﻿@model ProfileViewModel
+@{
+	int order = 0;
+}
+<div class="page-section inner-page-sec-padding">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="row">
+					<div class="col-lg-3 col-12">
+						<div class="myaccount-tab-menu nav" role="tablist">
+							<a href="#dashboard" class='@(ViewBag.Tab == "dashboard" ? "active" : "")' data-toggle="tab">
+								<i class="fas fa-tachometer-alt"></i>
+								Dashboard
+							</a>
+							<a href="#contacts" class='@(ViewBag.Tab == "contacts" ? "active" : "")' data-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Contacts</a>
+							<a href="#applications" class='@(ViewBag.Tab == "applications" ? "active" : "")' data-toggle="tab"><i class="fab fa-discourse"></i> Applications</a>
+							<a href="#account-info" class='@(ViewBag.Tab == "profile" ? "active" : "")' data-toggle="tab">
+								<i class="fa fa-user"></i> Account
+								Details
+							</a>
+							<a asp-action="logout" asp-controller="auth"><i class="fas fa-sign-out-alt"></i> Logout</a>
+						</div>
+					</div>
+					<!-- My Account Tab Menu End -->
+					<!-- My Account Tab Content Start -->
+					<div class="col-lg-9 col-12 mt--30 mt-lg--0">
+						<div class="tab-content" id="myaccountContent">
+							<!-- Single Tab Content Start -->
+							<div class='tab-pane fade @(ViewBag.Tab == "dashboard" ? "show active in" : "")' id="dashboard" role="tabpanel">
+								<div class="myaccount-content">
+									<h3>Dashboard</h3>
+									<div class="welcome mb-20">
+										<p>
+											Hello, <strong>@(User.FindFirst("Custom:FullName")?.Value)</strong> (If Not <strong>
+												@User.Identity.Name
+												!
+											</strong><a asp-action="logout" asp-controller="auth" class="logout">
+												Logout
+											</a>)
+										</p>
+									</div>
+									<p class="mb-0">
+										From your account dashboard. you can easily check &amp; view
+										your
+										recent contacts, manage your applications and edit your
+										password and account details.
+									</p>
+								</div>
+							</div>
+							<!-- Single Tab Content End -->
+							<!-- Single Tab Content Start -->
+							<div class='tab-pane fade @(ViewBag.Tab == "contacts" ? "show active in":"")' id="contacts" role="tabpanel">
+								<div class="myaccount-content">
+									<h3>Contacts</h3>
+									<div class="myaccount-table table-responsive text-center">
+										<table class="table table-bordered">
+											<thead class="thead-light">
+												<tr>
+													<th>No</th>
+													<th>Date</th>
+													<th>Subject</th>
+													<th>Message</th>
+													<th>Answer</th>
+												</tr>
+											</thead>
+											<tbody>
+												@foreach (var item in Model.Contacts) {
+													order++;
+													<tr>
+														<td>@order</td>
+														<td>@((item.CreatedAt).ToString("yyyy-MM-dd hh:mm"))</td>
+														<td>@item.Subject</td>
+														<td><a>@item.Message</a></td>
+														<td>$@item.Answer</td>
+													</tr>
+												}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- Single Tab Content End -->
+							<!-- Single Tab Content Start -->
+							<div class='tab-pane fade @(ViewBag.Tab == "applications" ? "show active in":"")' id="applications" role="tabpanel">
+								<div class="myaccount-content">
+									<h3>Applications</h3>
+									<div class="myaccount-table table-responsive text-center">
+										<table class="table table-bordered">
+											<thead class="thead-light">
+												<tr>
+													<th>No</th>
+													<th>Date</th>
+													<th>Course</th>
+													<th>Status</th>
+													<th>Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												@foreach (var item in Model.Applications) {
+													order++;
+													<tr>
+														<td>@order</td>
+														<td>@((item.CreatedAt).ToString("yyyy-MM-dd hh:mm"))</td>
+														<td>@item.Course.Name</td>
+														<td><a>@item.Status</a></td>
+														<td>
+															<a asp-action="cancel" asp-controller="home" asp-route-id="@item.Id" class="btn" style="background-color:#ec1c23">Cancel</a>
+														</td>
+													</tr>
+												}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- Single Tab Content End -->
+							<!-- Single Tab Content Start -->
+							<div class='tab-pane fade @(ViewBag.Tab == "profile" ? "show active in" : "")' id="account-info" role="tabpanel">
+								<div class="myaccount-content">
+									<h3>Account Details</h3>
+									<div class="account-details-form">
+										@Html.Partial("_ProfileCredEditFormPartial", Model.ProfileCredEditVM)
+										<div class="mt-5"></div>
+										@Html.Partial("_ProfilePassEditFormPartial", Model.ProfilePassEditVM)
+									</div>
+								</div>
+							</div>
+							<!-- Single Tab Content End -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Styles {
+	<link rel="stylesheet" href="~/pustok/css/main.css">
+	<link rel="stylesheet" href="~/pustok/css/plugins.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+}
+
+@section Scripts {
+	@Html.Partial("_ValidationScriptsPartial");
+	<script src="~/pustok/js/custom.js"></script>
+	<script src="~/pustok/js/plugins.js"></script>
+	<script src="~/pustok/js/ajax-mail.js"></script>
+}

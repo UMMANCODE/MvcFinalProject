@@ -1,9 +1,10 @@
-﻿using System.Security.Policy;
+﻿using System;
+using System.Security.Policy;
 
 namespace Project.Data {
-	public static class EmailTemplates {
-		private static string GetBaseTemplate(string content) {
-			string htmlContent = $@"
+  public static class EmailTemplates {
+    private static string GetBaseTemplate(string content) {
+      string htmlContent = $@"
 <!doctype html>
 <html>
   <head>
@@ -113,10 +114,10 @@ namespace Project.Data {
   </body>
 </html>
 ";
-			return htmlContent;
-		}
-		public static string GetResetPassword(string? fullname, string? url) {
-			string htmlContent = $@"
+      return htmlContent;
+    }
+    public static string GetResetPassword(string? fullname, string? url) {
+      string htmlContent = $@"
                             <td>
                               <p>Hi {fullname},</p>
                               <p>Forgot your password? Click the URL below to reset your password: {url}</p>
@@ -140,14 +141,14 @@ namespace Project.Data {
                               <p>If you didn't forget your password, please ignore this email!</p>
                               <p>- Umman Mammadov, CEO</p>
                             </td>";
-			return GetBaseTemplate(htmlContent);
-		}
+      return GetBaseTemplate(htmlContent);
+    }
 
-		public static string GetVerifyEmail(string? fullname, string? url) {
-			string htmlContent = $@"
+    public static string GetVerifyEmail(string? fullname, string? url) {
+      string htmlContent = $@"
                             <td>
                               <p>Hi {fullname},</p>
-                              <p>Forgot your password? Click the URL below to verify your email address: {url}</p>
+                              <p>Everything starts with verification. Click the URL below to verify your email address: {url}</p>
                               <table role='presentation' border='0' cellpadding='0' cellspacing='0' class='btn btn-primary'>
                                 <tbody>
                                   <tr>
@@ -167,7 +168,38 @@ namespace Project.Data {
                               </table>
                               <p>- Umman Mammadov, CEO</p>
                             </td>";
-			return GetBaseTemplate(htmlContent);
-		}
-	}
+      return GetBaseTemplate(htmlContent);
+    }
+
+    public static string GetCourseEnrollmentEmail(string? fullname, string? courseName, string result) {
+      string htmlContent;
+      if (result == "approved") {
+        htmlContent = $@"<td>
+                              <p>Hi {fullname},</p>
+                              <p>We are thrilled to announce that your application for {courseName} course is approved</p>
+                              <p>Wish you success in your next chapter</p>
+                              <p>- Umman Mammadov, CEO</p>
+                            </td>";
+      }
+      else {
+        htmlContent = $@"<td>
+                              <p>Hi {fullname},</p>
+                              <p>We are sorry to inform you that your application for {courseName} course is rejected</p>
+                              <p>Wish you success in your next chapter</p>
+                              <p>- Umman Mammadov, CEO</p>
+                            </td>";
+      }
+      return GetBaseTemplate(htmlContent);
+    }
+
+    public static string GetContactAnswerEmail(string? fullname, string? question, string? answer) {
+      string htmlContent = $@"<td>
+                              <p>Hi {fullname},</p>
+                              <p>Your question: {question}</p>
+                              <p>Our answer: {answer}</p>
+                              <p>- Umman Mammadov, CEO</p>
+                            </td>";
+      return GetBaseTemplate(htmlContent);
+    }
+  }
 }

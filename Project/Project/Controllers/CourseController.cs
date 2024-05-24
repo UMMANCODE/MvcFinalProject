@@ -69,7 +69,7 @@ namespace Project.Controllers {
 
 		public IActionResult Details(int id) {
 			var model = GetCourseDetails(id);
-			if (model == null) return NotFound();
+			if (model == null) return RedirectToAction("notfound", "error");
 			return View(model);
 		}
 

@@ -1,0 +1,11 @@
+﻿@model Tag
+@{
+  TempData["Page"] = "Create";
+}
+<form method="post" class="col-md-6 mx-auto">
+  <div class="form-group">
+    <input asp-for="Name" class="form-control" id="Name" placeholder="Name">
+    <span class="text-danger" asp-validation-for="Name"></span>
+  </div>
+  <button type="submit" class="btn btn-primary">Create</button>
+</form>

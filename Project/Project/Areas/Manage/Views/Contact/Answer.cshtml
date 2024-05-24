@@ -1,0 +1,13 @@
+﻿@model ContactAnswerViewModel
+@{
+  TempData["Page"] = "Answer";
+}
+<form method="post" class="col-md-6 mx-auto">
+  <div class="form-group">
+    <input asp-for="Answer" class="form-control" id="Answer" placeholder="Answer">
+    <span class="text-danger" asp-validation-for="Answer"></span>
+  </div>
+  <input name="ContactId" type="hidden" value="@Model.ContactId" />
+  <input name="UpdatedAt" type="hidden" value="@Model.UpdatedAt" />
+  <button type="submit" class="btn btn-primary">Answer</button>
+</form>

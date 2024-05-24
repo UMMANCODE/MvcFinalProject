@@ -1,0 +1,17 @@
+﻿@model Reply
+<div class="reply-area">
+	<h3>LEAVE A REPLY</h3>
+	<p>Please be kind!</p>
+	<form id="reply-form" asp-action="reply" asp-controller="blog" method="post">
+		<div class="row">
+			<div class="col-md-12">
+				<label asp-for="Message" class="mb-2">Message</label>
+				<textarea asp-for="Message" id="message" cols="15" rows="10"></textarea>
+				<span class="text-danger" asp-validation-for="Message"></span>
+			</div>
+			<input type="hidden" asp-for="BlogId" value="@Model.BlogId" />
+			<input type="hidden" asp-for="Blog" value="@Model.Blog" />
+		</div>
+		<button class="reply-btn default-btn" type="submit">Reply</button>
+	</form>
+</div>

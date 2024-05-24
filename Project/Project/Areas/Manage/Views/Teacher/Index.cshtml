@@ -1,0 +1,74 @@
+﻿@model PaginatedList<Teacher>
+@{
+	TempData["Page"] = "Teacher";
+	int order = (Model.PageIndex - 1) * Model.PageSize;
+}
+<div class="container-fluid py-4">
+	<div class="row">
+		<div class="col-12">
+			<div class="card mb-4">
+				<div class="card-header pb-0">
+					<h6>@(TempData["Page"])s table</h6>
+				</div>
+				<div class="card-header pb-0">
+					<a asp-action="create" class="btn btn-primary">Create</a>
+				</div>
+				<div class="card-body px-0 pt-0 pb-2">
+					<div class="table-responsive p-0">
+						<table class="table align-items-center mb-0">
+							<thead>
+								<tr>
+									<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order</th>
+									<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">FullName</th>
+									<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Position</th>
+									<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mail</th>
+									<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phone</th>
+									<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Image</th>
+									<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var item in Model.Items) {
+									<tr>
+										<td>
+											<div class="d-flex px-2 py-1 justify-content-center">
+												<div class="d-flex flex-column justify-content-center align-items-center">
+													<h6 class="mb-0 text-sm">@(++order)</h6>
+												</div>
+											</div>
+										</td>
+										<td>
+											<p class="text-xs font-weight-bold mb-0">@item.FullName</p>
+										</td>
+										<td class="align-middle text-center text-sm">
+											<p class="text-xs font-weight-bold mb-0">@item.Position</p>
+										</td>
+										<td class="align-middle text-center text-sm">
+											<p class="text-xs font-weight-bold mb-0">@item.Mail</p>
+										</td>
+										<td class="align-middle text-center text-sm">
+											<p class="text-xs font-weight-bold mb-0">@item.Phone</p>
+										</td>
+										<td class="align-middle text-center text-sm">
+											<img src="~/img/teacher/@item.ImageName" class="img-fluid" style="max-width: 100px;" />
+										</td>
+										<td class="align-middle text-center">
+											<a asp-action="edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+											<a asp-action="delete" asp-route-id="@item.Id" class="btn btn-danger delete-btn">Delete</a>
+										</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		@Html.Partial("_PaginatedListPartial", Model)
+	</div>
+</div>
+
+@section Scripts {
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="~/manage/js/custom.js"></script>
+}

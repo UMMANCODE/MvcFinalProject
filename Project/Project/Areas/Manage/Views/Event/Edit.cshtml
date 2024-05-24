@@ -1,0 +1,54 @@
+﻿@model Event
+@{
+  TempData["Page"] = "Edit";
+}
+<form method="post" class="col-md-6 mx-auto" enctype="multipart/form-data">
+  <div class="form-group">
+    <input asp-for="Name" class="form-control" id="Name" placeholder="Name">
+    <span class="text-danger" asp-validation-for="Name"></span>
+  </div>
+  <div class="form-group">
+    <input asp-for="Description" class="form-control" id="Description" placeholder="Description">
+    <span class="text-danger" asp-validation-for="Description"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="CategoryId">Category Id</label>
+    <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
+    <span class="text-danger" asp-validation-for="CategoryId"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="TagIds">EventTags</label>
+    <select asp-for="TagIds" class="form-control" id="TagIds" asp-items="ViewBag.Tags"></select>
+    <span class="text-danger" asp-validation-for="TagIds"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="TeacherIds">EventTeachers</label>
+    <select asp-for="TeacherIds" class="form-control" id="TeacherIds" asp-items="ViewBag.Teachers"></select>
+    <span class="text-danger" asp-validation-for="TeacherIds"></span>
+  </div>
+  <div class="form-group">
+    <input asp-for="StartDate" class="form-control" id="StartDate" placeholder="StartDate">
+    <span class="text-danger" asp-validation-for="StartDate"></span>
+  </div>
+  <div class="form-group">
+    <input asp-for="EndDate" class="form-control" id="EndDate" placeholder="EndDate">
+    <span class="text-danger" asp-validation-for="EndDate"></span>
+  </div>
+  <div class="form-group">
+    <input asp-for="Venue" class="form-control" id="Venue" placeholder="Venue">
+    <span class="text-danger" asp-validation-for="Venue"></span>
+  </div>
+  <div class="form-group">
+    <input asp-for="ImageFile" class="form-control imgInput">
+    <input type="hidden" name="ImageName" value="@Model.ImageName" placeholder="ImageFile" />
+    <div class="preview-box">
+      <img width="200" class="previewImg" src="~/img/event/@Model.ImageName" />
+    </div>
+    <span class="text-danger" asp-validation-for="ImageFile"></span>
+  </div>
+  <button type="submit" class="btn btn-primary">Edit</button>
+</form>
+
+@section Scripts {
+  <script src="~/manage/js/custom.js"></script>
+}

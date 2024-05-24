@@ -257,6 +257,9 @@ namespace Project.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
@@ -387,6 +390,10 @@ namespace Project.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Answer")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
                     b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -410,6 +417,9 @@ namespace Project.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -701,6 +711,37 @@ namespace Project.Migrations
                     b.ToTable("Posts");
                 });
 
+            modelBuilder.Entity("Project.Models.Reply", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("BlogId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("BlogId");
+
+                    b.ToTable("Replies");
+                });
+
             modelBuilder.Entity("Project.Models.Settings", b =>
                 {
                     b.Property<int>("Id")
@@ -955,6 +996,9 @@ namespace Project.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<bool?>("ShouldChangePassword")
+                        .HasColumnType("bit");
+
                     b.HasDiscriminator().HasValue("AppUser");
                 });
 
@@ -1144,6 +1188,25 @@ namespace Project.Migrations
                     b.Navigation("Teacher");
                 });
 
+            modelBuilder.Entity("Project.Models.Reply", b =>
+                {
+                    b.HasOne("Project.Models.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Project.Models.Blog", "Blog")
+                        .WithMany("Replies")
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Blog");
+                });
+
             modelBuilder.Entity("Project.Models.TeacherIcons", b =>
                 {
                     b.HasOne("Project.Models.Icon", "Icon")
@@ -1185,6 +1248,8 @@ namespace Project.Migrations
             modelBuilder.Entity("Project.Models.Blog", b =>
                 {
                     b.Navigation("BlogTags");
+
+                    b.Navigation("Replies");
                 });
 
             modelBuilder.Entity("Project.Models.Category", b =>

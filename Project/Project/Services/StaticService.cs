@@ -11,9 +11,8 @@ namespace Project.Services {
 			return _context.Settings.ToDictionary(x => x.Key, x => x.Value);
 		}
 
-		public List<string> GetCruds()
-		{
-			return new List<string> { "Course", "Event", "Blog", "Slider", "Testimonial", "Teacher", "Category", "Tag", "Notice", "Feature" };
-        }
-    }
+		public List<string> GetCruds() {
+			return ["Course", "Event", "Blog", "Slider", "Testimonial", "Teacher", "Category", "Tag", "Notice", "Feature"];
+		}
+	}
 }

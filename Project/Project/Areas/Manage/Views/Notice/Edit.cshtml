@@ -1,0 +1,15 @@
+﻿@model Notice
+@{
+  TempData["Page"] = "Edit";
+}
+<form method="post" class="col-md-6 mx-auto">
+  <div class="form-group">
+    <input asp-for="Topic" class="form-control" id="Topic" placeholder="Topic">
+    <span class="text-danger" asp-validation-for="Topic"></span>
+  </div>
+  <div class="form-group">
+    <input asp-for="Date" class="form-control" id="Date" placeholder="Date">
+    <span class="text-danger" asp-validation-for="Date"></span>
+  </div>
+  <button type="submit" class="btn btn-primary">Edit</button>
+</form>

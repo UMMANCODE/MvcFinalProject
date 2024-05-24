@@ -1,0 +1,24 @@
+﻿@model ProfileCredEditViewModel
+<form method="post" asp-controller="auth" asp-action="profile">
+	<div class="row">
+		<div class="col-12  mb--30">
+			<h4>Change Credentials</h4>
+		</div>
+		<div class="col-12  mb--30">
+			<input asp-for=FullName id="FullName" placeholder="FullName">
+			<span class="text-danger" asp-validation-for="FullName"></span>
+		</div>
+		<div class="col-12  mb--30">
+			<input asp-for=UserName id="UserName" placeholder="UserName">
+			<span class="text-danger" asp-validation-for="UserName"></span>
+		</div>
+		<div class="col-12  mb--30">
+			<input asp-for=Email id="Email" placeholder="Email">
+			<span class="text-danger" asp-validation-for="Email"></span>
+		</div>
+		<div class="text-danger col-12  mb--30" asp-validation-summary="ModelOnly"></div>
+		<div class="col-12">
+			<button type="submit" class="btn" style="background-color:#ec1c23">Save Changes</button>
+		</div>
+	</div>
+</form>

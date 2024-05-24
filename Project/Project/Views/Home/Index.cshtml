@@ -6,8 +6,7 @@
 <!-- Background Area Start -->
 <section id="slider-container" class="slider-area">
 	<div class="slider-owl owl-theme owl-carousel">
-		@foreach (var slider in Model.Sliders)
-		{
+		@foreach (var slider in Model.Sliders) {
 			<!-- Start Slingle Slide -->
 			<div class="single-slide item" style="background-image: url('/img/slider/@slider.ImageName')">
 				<!-- Start Slider Content -->
@@ -37,30 +36,31 @@
 <section class="notice-area pt-150 pb-150">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6 col-sm-6 col-xs-12">
+			<div class="col-6">
 				<div class="notice-left">
-					<h3>notice board</h3>
-					@for (int i = 0; i < Model.Notices.Count; i++)
-					{
-						<div class='single-notice-left @(i % 3 == 2 ? "pb-70": "mb-25 pb-25")'>
+					<h3>Notice Board</h3>
+					@for (int i = 0; i < Model.Notices.Count; i++) {
+						<div class='single-notice-left @(i % 3 == 2 ? "pb-70" : "mb-25 pb-25")' style="word-wrap: break-word;">
 							<h4>@Model.Notices[i].Date.ToString("d, MMMM yyyy")</h4>
 							<p>@Model.Notices[i].Topic</p>
 						</div>
 					}
 				</div>
 			</div>
-			<div class="notice-right">
-				@for (int i = 0; i < Model.Features.Count; i++)
-				{
-					<div class='single-notice-right @(i % 3 == 2 ? "" : "mb-25 pb-25")'>
-						<h3>@Model.Features[i].Title</h3>
-						<p>@Model.Features[i].Description</p>
-					</div>
-				}
+			<div class="col-6">
+				<div class="notice-right">
+					@for (int i = 0; i < Model.Features.Count; i++) {
+						<div class='single-notice-right @(i % 3 == 2 ? "" : "mb-25 pb-25")' style="word-wrap: break-word;">
+							<h3>@Model.Features[i].Title</h3>
+							<p>@Model.Features[i].Description</p>
+						</div>
+					}
+				</div>
 			</div>
 		</div>
 	</div>
 </section>
+
 <!-- Notice End -->
 <!-- Choose Start -->
 <section class="choose-area pb-85 pt-77">
@@ -89,8 +89,7 @@
 			</div>
 		</div>
 		<div class="row">
-			@for (int i = 0; i < Model.Courses.Count; i++)
-			{
+			@for (int i = 0; i < Model.Courses.Count; i++) {
 				<div class='col-md-4 @(i % 3 == 2 ? "hidden-sm": "col-sm-6") col-sm-6 col-xs-12'>
 					<div class="single-course">
 						<div class="course-img">
@@ -126,8 +125,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6 col-sm-12 col-xs-12">
-				@for (int i = 0; i < Model.Events.Count / 2; i++)
-				{
+				@for (int i = 0; i < Model.Events.Count / 2; i++) {
 					<div class='single-event @(i % 4 == 3 ? "" : "mb-35")'>
 						<div class="event-date">
 							<h3><a asp-action="details" asp-controller="event" asp-route-id="@Model.Events[i].Id">@Model.Events[i].StartDate.Day <span>@Model.Events[i].StartDate.ToString("MMMM")</span></a></h3>
@@ -148,8 +146,7 @@
 				}
 			</div>
 			<div class="col-md-6 hidden-sm hidden-xs">
-				@for (int i = Model.Events.Count / 2; i < Model.Events.Count; i++)
-				{
+				@for (int i = Model.Events.Count / 2; i < Model.Events.Count; i++) {
 					<div class='single-event @(i % 4 == 3 ? "" : "mb-35")'>
 						<div class="event-date">
 							<h3><a asp-action="details" asp-controller="event" asp-route-id="@Model.Events[i].Id">@Model.Events[i].StartDate.Day <span>@Model.Events[i].StartDate.ToString("MMMM")</span></a></h3>
@@ -178,8 +175,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="testimonial-owl owl-theme owl-carousel">
-				@foreach (var testimonial in Model.Testimonials)
-				{
+				@foreach (var testimonial in Model.Testimonials) {
 					<div class="col-md-8 col-md-offset-2 col-sm-12">
 						<div class="single-testimonial">
 							<div class="testimonial-info">
@@ -212,8 +208,7 @@
 			</div>
 		</div>
 		<div class="row">
-			@for (int i = 0; i < Model.Blogs.Count; i++)
-			{
+			@for (int i = 0; i < Model.Blogs.Count; i++) {
 				<div class='col-md-4 @(i % 3 == 2 ? "hidden-sm" : "col-sm-6") col-xs-12'>
 					<div class="single-blog">
 						<div class="blog-img">
@@ -224,7 +219,7 @@
 						</div>
 						<div class="blog-content">
 							<div class="blog-top">
-								<p>@Model.Blogs[i].Author  /  @Model.Blogs[i].Date.ToString("d, MMMM yyyy")  /  <i class="fa fa-comments-o"></i> CommentCount</p>
+								<p>@Model.Blogs[i].Author  /  @Model.Blogs[i].Date.ToString("d, MMMM yyyy")  /  <i class="fa fa-comments-o"></i> @Model.Blogs[i].Replies.Count </p>
 							</div>
 							<div class="blog-bottom">
 								<h2><a asp-action="details" asp-controller="blog" asp-route-id="@Model.Blogs[i].Id">@Model.Blogs[i].Name </a></h2>

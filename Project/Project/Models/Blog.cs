@@ -16,6 +16,7 @@ namespace Project.Models {
 		public string Author { get; set; }
 		[Required]
 		[NotActual]
+		[DataType(DataType.Date)]
 		public DateTime Date { get; set; }
 		[MaxLength(100)]
 		public string? ImageName { get; set; }
@@ -26,5 +27,8 @@ namespace Project.Models {
 		public int CategoryId { get; set; }
 		public Category? Category { get; set; }
 		public List<BlogTags>? BlogTags { get; set; } = new();
-	}
+    [NotMapped]
+    public List<int>? TagIds { get; set; } = new();
+    public List<Reply>? Replies { get; set; } = new();
+  }
 }

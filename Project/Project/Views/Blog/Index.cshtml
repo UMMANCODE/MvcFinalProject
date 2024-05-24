@@ -31,7 +31,7 @@
 						</div>
 						<div class="blog-content">
 							<div class="blog-top">
-								<p>@blog.value.Author  /  @blog.value.Date.ToString("d, MMMM yyyy")  /  <i class="fa fa-comments-o"></i> CommentCount </p>
+								<p>@blog.value.Author  /  @blog.value.Date.ToString("d, MMMM yyyy")  /  <i class="fa fa-comments-o"></i> @blog.value.Replies.Count </p>
 							</div>
 							<div class="blog-bottom">
 								<h2><a asp-action="details" asp-controller="blog" asp-route-id="@blog.value.Id">@blog.value.Name</a></h2>

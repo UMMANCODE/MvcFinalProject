@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MvcPustok.Data;
+using Project.Data;
 using Project.Models;
+using Project.Models.Enums;
 using Project.ViewModels;
 
 namespace Project.Controllers {
@@ -117,6 +119,17 @@ namespace Project.Controllers {
 			return Json(new { success = isSubscribed, message = isSubscribed ? "Subscription successful" : "Subscription failed" });
 		}
 
+		public IActionResult Cancel(int id) {
+			var message = _context.Applications.Find(id);
+			if (message == null)
+				return RedirectToAction("notfound", "error");
+
+			message.Status = ApplicationStatus.Cancelled;
+			message.UpdatedAt = DateTime.Now;
+			_context.SaveChanges();
+
+			return RedirectToAction("profile", "auth", new {tab = "applications"});
+		}
 
 		public IActionResult SearchAutocomplete(string? query) {
 			var courses = _context.Courses.Where(x => x.Name.Contains(query)).Take(3).ToList();
