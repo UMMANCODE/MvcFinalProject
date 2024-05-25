@@ -303,5 +303,48 @@ namespace Project.Controllers {
 
 			return View(profileVM);
 		}
-	}
+
+    [HttpGet("~/auth/google")]
+    public IActionResult GoogleLogin() {
+      var redirectUrl = Url.Action("GoogleResponse", "Auth");
+      var properties = _signInManager.ConfigureExternalAuthenticationProperties("Google", redirectUrl);
+      return Challenge(properties, "Google");
+    }
+
+    [HttpGet("~/auth/google-response")]
+    public async Task<IActionResult> GoogleResponse() {
+      var info = await _signInManager.GetExternalLoginInfoAsync();
+      if (info == null) {
+        return RedirectToAction(nameof(Login));
+      }
+
+      var signInResult = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+      if (signInResult.Succeeded) {
+        return RedirectToAction("Index", "Home");
+      }
+      else {
+        var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+        if (email != null) {
+          var user = await _userManager.FindByEmailAsync(email);
+          if (user == null) {
+            user = new AppUser {
+              UserName = email,
+              Email = email,
+              FullName = info.Principal.FindFirstValue(ClaimTypes.Name)
+            };
+            await _userManager.CreateAsync(user);
+            await _userManager.AddToRoleAsync(user, "user");
+            await _userManager.AddLoginAsync(user, info);
+            await _signInManager.SignInAsync(user, isPersistent: false);
+          }
+          else {
+            await _userManager.AddLoginAsync(user, info);
+            await _signInManager.SignInAsync(user, isPersistent: false);
+          }
+          return RedirectToAction("Index", "Home");
+        }
+        return RedirectToAction(nameof(Login));
+      }
+    }
+  }
 }

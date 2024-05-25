@@ -1,0 +1,17 @@
+﻿@model Settings
+
+<h1>Create Setting</h1>
+
+<form asp-action="Create">
+  <div>
+    <label asp-for="Key"></label>
+    <input asp-for="Key" />
+  </div>
+  <div>
+    <label asp-for="Value"></label>
+    <input asp-for="Value" />
+  </div>
+  <button type="submit">Create</button>
+</form>
+
+<a href='@Url.Action("Index")'>Back to List</a>

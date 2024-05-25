@@ -94,6 +94,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXERhc2hib2FyZFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/user/Desktop/Code Academy/BACKEND/Project-Eduhome/Project/Project/Areas/Manage/Views/Error/Forbidden.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEVycm9yXEZvcmJpZGRlbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Code Academy/BACKEND/Project-Eduhome/Project/Project/Areas/Manage/Views/Error/NotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEVycm9yXE5vdEZvdW5kLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Code Academy/BACKEND/Project-Eduhome/Project/Project/Areas/Manage/Views/Error/Unauthorized.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEVycm9yXFVuYXV0aG9yaXplZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Code Academy/BACKEND/Project-Eduhome/Project/Project/Areas/Manage/Views/Error/Unknown.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEVycm9yXFVua25vd24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/user/Desktop/Code Academy/BACKEND/Project-Eduhome/Project/Project/Areas/Manage/Views/Event/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEV2ZW50XENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -128,6 +144,26 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/user/Desktop/Code Academy/BACKEND/Project-Eduhome/Project/Project/Areas/Manage/Views/Notice/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXE5vdGljZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Code Academy/BACKEND/Project-Eduhome/Project/Project/Areas/Manage/Views/Settings/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNldHRpbmdzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Code Academy/BACKEND/Project-Eduhome/Project/Project/Areas/Manage/Views/Settings/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNldHRpbmdzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Code Academy/BACKEND/Project-Eduhome/Project/Project/Areas/Manage/Views/Settings/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNldHRpbmdzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Code Academy/BACKEND/Project-Eduhome/Project/Project/Areas/Manage/Views/Settings/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNldHRpbmdzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Code Academy/BACKEND/Project-Eduhome/Project/Project/Areas/Manage/Views/Settings/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNldHRpbmdzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/user/Desktop/Code Academy/BACKEND/Project-Eduhome/Project/Project/Areas/Manage/Views/Slider/Create.cshtml]
@@ -232,6 +268,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/user/Desktop/Code Academy/BACKEND/Project-Eduhome/Project/Project/Views/Course/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Code Academy/BACKEND/Project-Eduhome/Project/Project/Views/Error/Forbidden.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRm9yYmlkZGVuLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Code Academy/BACKEND/Project-Eduhome/Project/Project/Views/Error/NotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcTm90Rm91bmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Code Academy/BACKEND/Project-Eduhome/Project/Project/Views/Error/Unauthorized.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcVW5hdXRob3JpemVkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Code Academy/BACKEND/Project-Eduhome/Project/Project/Views/Error/Unknown.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcVW5rbm93bi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/user/Desktop/Code Academy/BACKEND/Project-Eduhome/Project/Project/Views/Event/Details.cshtml]

@@ -1,0 +1,26 @@
+﻿@model Dictionary<string, string>
+
+<h1>Settings</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Value</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var setting in Model) {
+      <tr>
+        <td>@setting.Key</td>
+        <td>@setting.Value</td>
+        <td>
+          <a href='@Url.Action("Details", new { key = setting.Key })'>Details</a> |
+          <a href='@Url.Action("Edit", new { key = setting.Key })'>Edit</a> |
+          <a href='@Url.Action("Delete", new { key = setting.Key })'>Delete</a>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+<a href='@Url.Action("Create")'>Create New Setting</a>

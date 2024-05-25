@@ -1,0 +1,17 @@
+﻿@model Settings
+
+<h1>Edit Setting</h1>
+
+<form asp-action="Edit">
+  <div>
+    <label asp-for="Key"></label>
+    <input asp-for="Key" readonly />
+  </div>
+  <div>
+    <label asp-for="Value"></label>
+    <input asp-for="Value" />
+  </div>
+  <button type="submit">Save</button>
+</form>
+
+<a href='@Url.Action("Index")'>Back to List</a>

@@ -86,7 +86,7 @@ namespace Project.Areas.Manage.Controllers {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Login(UserLoginViewModel userLoginViewModel) {
+    public async Task<IActionResult> Login(UserLoginViewModel userLoginViewModel, string? returnUrl) {
       if (ModelState.IsValid) {
         var user = await _userManager.FindByNameAsync(userLoginViewModel.UserName);
 				if (user == null) {
@@ -98,8 +98,8 @@ namespace Project.Areas.Manage.Controllers {
 				}
 				var result = await _signInManager.PasswordSignInAsync(user, userLoginViewModel.Password, userLoginViewModel.RememberMe, false);
         if (result.Succeeded) {
-          return RedirectToAction("Index", "Dashboard");
-        }
+					return returnUrl != null ? Redirect(returnUrl) : RedirectToAction("index", "dashboard");
+				}
         ModelState.AddModelError("", "Invalid login attempt.");
       }
       return View(userLoginViewModel);

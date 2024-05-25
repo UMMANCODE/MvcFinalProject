@@ -9,6 +9,7 @@
       "Project/1.0.0": {
         "dependencies": {
           "MailKit": "4.6.0",
+          "Microsoft.AspNetCore.Authentication.Google": "8.0.5",
           "Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter": "8.0.4",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.5",
           "Microsoft.EntityFrameworkCore": "8.0.5",
@@ -612,6 +613,14 @@
           "lib/net8.0/MailKit.dll": {
             "assemblyVersion": "4.6.0.0",
             "fileVersion": "4.6.0.0"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Authentication.Google/8.0.5": {
+        "runtime": {
+          "lib/net8.0/Microsoft.AspNetCore.Authentication.Google.dll": {
+            "assemblyVersion": "8.0.5.0",
+            "fileVersion": "8.0.524.22404"
           }
         }
       },
@@ -2664,6 +2673,13 @@
       "sha512": "sha512-EJ1L2AtoO9nGZz2AKl2WGGw4pLIpkgEwzpczmZWBLqX0m33ueVA+CJYd9hg52XOvvEj+w5PVzB7yy26E0WHzKQ==",
       "path": "mailkit/4.6.0",
       "hashPath": "mailkit.4.6.0.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Authentication.Google/8.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-E9gxy1BzCAQ04n7rVSbPe2bZux2zSaCEY63am3W2abaEikdxCKeai+rj34U++/uYybaAoprG39CikVhYL4imKg==",
+      "path": "microsoft.aspnetcore.authentication.google/8.0.5",
+      "hashPath": "microsoft.aspnetcore.authentication.google.8.0.5.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authorization/8.0.4": {
       "type": "package",

@@ -132,32 +132,30 @@ $(document).ready(function () {
       ul.empty();
     }
   });
-  function showToast(message) {
-    const toastModel = document.getElementById('liveToast')
-    toastModel.querySelector('.toast-body').innerText = message
-    const toast = bootstrap.Toast.getOrCreateInstance(toastModel)
-    toast.show()
-  }
 
-  document.getElementById('Subscribe-Form').addEventListener('submit', function (event) {
-    event.preventDefault();
-    showToast("Processing...");
-    const email = $("#EmailAddress-Input").val();
-    fetch(`/Home/Subscribe?email=${email}`)
-      .then(response => response.json().then(data => ({
-        status: response.status,
-        body: data
-      })))
-      .then(({ status, body }) => {
-        if (body.success) {
-          showToast(body.message);
-        } else {
-          showToast("Error: " + (body.message || "Unknown error occurred"));
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        showToast("An error occurred. Please try again.");
-      });
-  });
+  //function showToast(message) {
+  //  $("#liveToast .toast-body").text(message)
+  //  $("#liveToast").toast('show');
+  //}
+
+  //document.getElementById('Subscribe-Form').addEventListener('submit', function (event) {
+  //  event.preventDefault();
+  //  const email = $("#EmailAddress-Input").val();
+  //  fetch(`/Home/Subscribe?email=${email}`)
+  //    .then(response => response.json().then(data => ({
+  //      status: response.status,
+  //      body: data
+  //    })))
+  //    .then(({ status, body }) => {
+  //      if (body.success) {
+  //        showToast(body.message);
+  //      } else {
+  //        showToast("Error: " + (body.message || "Unknown error occurred"));
+  //      }
+  //    })
+  //    .catch(error => {
+  //      console.error('Error:', error);
+  //      showToast("An error occurred. Please try again.");
+  //    });
+  //});
 });

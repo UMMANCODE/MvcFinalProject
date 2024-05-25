@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
     },
     {
+      "Id": "C:\\Users\\user\\Desktop\\Code Academy\\BACKEND\\Project-Eduhome\\Project\\Project\\wwwroot\\css\\error\\style.css",
+      "PackagePath": "staticwebassets\\css\\error\\style.css"
+    },
+    {
       "Id": "C:\\Users\\user\\Desktop\\Code Academy\\BACKEND\\Project-Eduhome\\Project\\Project\\wwwroot\\css\\et-line-icon.css",
       "PackagePath": "staticwebassets\\css\\et-line-icon.css"
     },
@@ -771,6 +775,14 @@
     {
       "Id": "C:\\Users\\user\\Desktop\\Code Academy\\BACKEND\\Project-Eduhome\\Project\\Project\\wwwroot\\manage\\css\\soft-ui-dashboard.min.css",
       "PackagePath": "staticwebassets\\manage\\css\\soft-ui-dashboard.min.css"
+    },
+    {
+      "Id": "C:\\Users\\user\\Desktop\\Code Academy\\BACKEND\\Project-Eduhome\\Project\\Project\\wwwroot\\manage\\error\\css\\style.css",
+      "PackagePath": "staticwebassets\\manage\\error\\css\\style.css"
+    },
+    {
+      "Id": "C:\\Users\\user\\Desktop\\Code Academy\\BACKEND\\Project-Eduhome\\Project\\Project\\wwwroot\\manage\\error\\img\\bg.jpg",
+      "PackagePath": "staticwebassets\\manage\\error\\img\\bg.jpg"
     },
     {
       "Id": "C:\\Users\\user\\Desktop\\Code Academy\\BACKEND\\Project-Eduhome\\Project\\Project\\wwwroot\\manage\\fonts\\nucleo-icons.eot",
