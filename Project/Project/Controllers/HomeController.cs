@@ -67,7 +67,9 @@ namespace Project.Controllers {
 				return View("Contact", contactViewModel);
 			}
 
-			Contact contact = new();
+			_ = new
+			Contact();
+			Contact contact;
 
 			if (User.Identity.IsAuthenticated) {
 				var user = await _userManager.GetUserAsync(User);
@@ -98,7 +100,7 @@ namespace Project.Controllers {
 			if (contact.Id > 0) {
 				TempData["Result"] = "success";
 				TempData["Message"] = "Message sent successfully!";
-				return View("Contact", contactViewModel);
+				return RedirectToAction("Contact", "Home");
 			}
 			else {
 				TempData["Result"] = "danger";

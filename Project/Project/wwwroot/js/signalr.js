@@ -7,7 +7,7 @@
 
   setTimeout(() => {
     hideToast();
-  }, 3000);
+  }, 10000);
 }
 
 function hideToast() {

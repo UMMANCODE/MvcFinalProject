@@ -1,7 +1,7 @@
 ﻿@model ContactFormViewModel
 <div class="reply-area">
 	<h3>LEAVE A message</h3>
-	<form id="contact-form" asp-action="sendmessage" asp-controller="home" method="post">
+	<form id="message-form" asp-action="sendmessage" asp-controller="home" method="post">
 		<div class="row">
 			<div class="col-md-12">
 				<label asp-for="Subject">Subject</label>
@@ -11,6 +11,7 @@
 				<textarea cols="15" rows="10" asp-for="Message" id="Message"></textarea>
 				<span class="text-danger" asp-validation-for="Message"></span>
 			</div>
+			<div class="text-danger" asp-validation-summary="ModelOnly"></div>
 		</div>
 		<button type="submit" class="btn btn-primary">Send Message</button>
 	</form>

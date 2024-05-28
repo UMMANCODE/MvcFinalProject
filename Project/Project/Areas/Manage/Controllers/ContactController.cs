@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using MvcPustok.Data;
 using Project.Areas.Manage.ViewModels;
@@ -14,10 +15,13 @@ namespace Project.Areas.Manage.Controllers {
   public class ContactController : Controller {
 		private readonly AppDbContext _context;
     private readonly EmailService _emailService;
-    public ContactController(AppDbContext context, EmailService emailService) {
+		private readonly IHubContext<ToastHub> _hubContext;
+
+		public ContactController(AppDbContext context, EmailService emailService, IHubContext<ToastHub> hubContext) {
       _context = context;
       _emailService = emailService;
-    }
+			_hubContext = hubContext;
+		}
 
     public IActionResult Index(int page = 1) {
       var query = _context.Contacts
@@ -34,8 +38,11 @@ namespace Project.Areas.Manage.Controllers {
     }
 
     public IActionResult Answer(int id) {
-      var contact = _context.Contacts.Find(id);
-      if (contact == null)
+      var contact = _context.Contacts
+				.Include(x => x.AppUser)
+				.FirstOrDefault(x => x.Id == id);
+
+			if (contact == null)
         return RedirectToAction("notfound", "error");
 
       var contactAnswerVM = new ContactAnswerViewModel {
@@ -60,10 +67,22 @@ namespace Project.Areas.Manage.Controllers {
       contact.Answer = contactAnswerVM.Answer;
       contact.UpdatedAt = contactAnswerVM.UpdatedAt;
       _context.SaveChanges();
-      var body = EmailTemplates.GetContactAnswerEmail(contact.AppUser.FullName, contact.Message, contact.Answer);
-      _emailService.Send(contact.AppUser.Email, "Contact Answer", body);
 
-      return RedirectToAction("index");
+
+			string body;
+			if (contact.AppUser != null) {
+				body = EmailTemplates.GetContactAnswerEmail(contact.AppUser.FullName, contact.Message, contact.Answer);
+				_emailService.Send(contact.AppUser.Email, "Answer", body);
+			}
+			else {
+				body = EmailTemplates.GetContactAnswerEmail(contact.Name, contact.Message, contact.Answer);
+				_emailService.Send(contact.Email, "Answer", body);
+			}
+
+			if (contact.AppUserId != null)
+				_hubContext.Clients.User(contact.AppUserId).SendAsync("ReceiveMessage", "Your question has been answered");
+
+			return RedirectToAction("index");
     }
   }
 }

@@ -44,6 +44,7 @@ namespace Project.Areas.Manage.Controllers {
 				.Include(x => x.AppUser)
 				.Include(x => x.Course)
 				.FirstOrDefault(x => x.Id == id);
+
 			if (message == null)
         return RedirectToAction("notfound", "error");
 
