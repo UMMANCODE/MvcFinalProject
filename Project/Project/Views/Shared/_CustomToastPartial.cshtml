@@ -1,0 +1,61 @@
+﻿<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+	<div class="toast-header">
+		<img src="~/img/icon/section.png" class="rounded me-2" alt="logo">
+		<strong class="me-auto">EDUHOME</strong>
+		<button type="button" class="btn-close" aria-label="Close">x</button>
+	</div>
+	<div class="toast-body">
+		Hello, world! This is a toast message.
+	</div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function showToast(message) {
+      const toastBody = document.querySelector("#liveToast .toast-body");
+      toastBody.textContent = message;
+      const toast = document.getElementById('liveToast');
+
+      toast.classList.add('show');
+
+      setTimeout(() => {
+        hideToast();
+      }, 3000);
+    }
+
+    function hideToast() {
+      const toast = document.getElementById('liveToast');
+      toast.classList.remove('show');
+    }
+
+    document.querySelector('#liveToast .btn-close').addEventListener('click', hideToast);
+
+    document.getElementById('Subscribe-Form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const email = document.getElementById("EmailAddress-Input").value;
+
+      fetch(`/Home/Subscribe`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `email=${encodeURIComponent(email)}`
+      })
+        .then(response => response.json().then(data => ({
+          status: response.status,
+          body: data
+        })))
+        .then(({ status, body }) => {
+          if (body.success) {
+            showToast(body.message);
+          } else {
+            showToast("Error: " + (body.message || "Unknown error occurred"));
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          showToast("An error occurred. Please try again.");
+        });
+    });
+  });
+</script>

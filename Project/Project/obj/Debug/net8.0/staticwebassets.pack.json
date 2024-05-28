@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
     },
     {
+      "Id": "C:\\Users\\user\\Desktop\\Code Academy\\BACKEND\\Project-Eduhome\\Project\\Project\\wwwroot\\css\\custom-toast.css",
+      "PackagePath": "staticwebassets\\css\\custom-toast.css"
+    },
+    {
       "Id": "C:\\Users\\user\\Desktop\\Code Academy\\BACKEND\\Project-Eduhome\\Project\\Project\\wwwroot\\css\\error\\style.css",
       "PackagePath": "staticwebassets\\css\\error\\style.css"
     },
@@ -519,6 +523,10 @@
     {
       "Id": "C:\\Users\\user\\Desktop\\Code Academy\\BACKEND\\Project-Eduhome\\Project\\Project\\wwwroot\\js\\plugins.js",
       "PackagePath": "staticwebassets\\js\\plugins.js"
+    },
+    {
+      "Id": "C:\\Users\\user\\Desktop\\Code Academy\\BACKEND\\Project-Eduhome\\Project\\Project\\wwwroot\\js\\signalr.js",
+      "PackagePath": "staticwebassets\\js\\signalr.js"
     },
     {
       "Id": "C:\\Users\\user\\Desktop\\Code Academy\\BACKEND\\Project-Eduhome\\Project\\Project\\wwwroot\\js\\vendor\\jquery-1.12.0.min.js",

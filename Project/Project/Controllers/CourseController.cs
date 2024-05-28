@@ -76,48 +76,54 @@ namespace Project.Controllers {
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Apply(ApplyFormViewModel model) {
+			var courseDetails = GetCourseDetails(model.CourseId);
+			courseDetails.ApplyFormVM = model;
+
 			if (!ModelState.IsValid) {
-				var courseDetails = GetCourseDetails(model.CourseId);
-				courseDetails.ApplyFormVM = model;
 				return View("Details", courseDetails);
 			}
+
+			Application application = new();
+
 			if (User.Identity.IsAuthenticated) {
 				var course = _context.Courses.FirstOrDefault(c => c.Id == model.CourseId);
 				var user = await _userManager.GetUserAsync(User);
-				var application = new Application {
+				application = new Application {
 					CourseId = model.CourseId,
 					Course = course,
 					AppUserId = user.Id,
 					AppUser = user,
 					Status = ApplicationStatus.Processing
 				};
-				_context.Applications.Add(application);
-				_context.SaveChanges();
-				TempData["Success"] = "Your application has been sent successfully";
-				return RedirectToAction("details", new { id = model.CourseId });
 			}
 			else {
 				var name = model.Name;
 				var email = model.Email;
 				if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email)) {
 					ModelState.AddModelError("", "Name and Email are required");
-					var courseDetails = GetCourseDetails(model.CourseId);
-					courseDetails.ApplyFormVM = model;
 					return View("Details", courseDetails);
 				}
 				var course = _context.Courses.FirstOrDefault(c => c.Id == model.CourseId);
-				var application = new Application {
+				application = new Application {
 					CourseId = model.CourseId,
 					Course = course,
 					Email = email,
 					Name = name,
 					Status = ApplicationStatus.Processing
 				};
-				_context.Applications.Add(application);
-				_context.SaveChanges();
-				TempData["Success"] = "Your application has been sent successfully";
-				//return RedirectToAction("details", new { id = model.CourseId });
-				return Json(new { success = true });
+			}
+			_context.Applications.Add(application);
+			_context.SaveChanges();
+
+			if (application.Id > 0) {
+				TempData["Result"] = "success";
+				TempData["Message"] = "Application submitted successfully!";
+				return RedirectToAction("Details", new { id = model.CourseId });
+			}
+			else {
+				TempData["Result"] = "danger";
+				TempData["Message"] = "Application failed!";
+				return View("Details", courseDetails);
 			}
 		}
 	}

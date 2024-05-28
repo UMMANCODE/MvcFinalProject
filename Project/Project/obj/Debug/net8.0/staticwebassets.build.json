@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "f8ppio/T89BsGydyEVySBvKtzYZP6JalsgklKfS1xGI=",
+  "Hash": "m7gwQ8phfpH0Nu3ulIeUNGQ5e6hxA+0NaXdmmwg8m4A=",
   "Source": "Project",
   "BasePath": "_content/Project",
   "Mode": "Default",
@@ -129,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\bootstrap.min.css"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Desktop\\Code Academy\\BACKEND\\Project-Eduhome\\Project\\Project\\wwwroot\\css\\custom-toast.css",
+      "SourceId": "Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Desktop\\Code Academy\\BACKEND\\Project-Eduhome\\Project\\Project\\wwwroot\\",
+      "BasePath": "_content/Project",
+      "RelativePath": "css/custom-toast.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\custom-toast.css"
     },
     {
       "Identity": "C:\\Users\\user\\Desktop\\Code Academy\\BACKEND\\Project-Eduhome\\Project\\Project\\wwwroot\\css\\error\\style.css",
@@ -2542,6 +2561,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\plugins.js"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Desktop\\Code Academy\\BACKEND\\Project-Eduhome\\Project\\Project\\wwwroot\\js\\signalr.js",
+      "SourceId": "Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Desktop\\Code Academy\\BACKEND\\Project-Eduhome\\Project\\Project\\wwwroot\\",
+      "BasePath": "_content/Project",
+      "RelativePath": "js/signalr.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\signalr.js"
     },
     {
       "Identity": "C:\\Users\\user\\Desktop\\Code Academy\\BACKEND\\Project-Eduhome\\Project\\Project\\wwwroot\\js\\vendor\\jquery-1.12.0.min.js",

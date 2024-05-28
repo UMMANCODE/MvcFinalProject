@@ -36,7 +36,7 @@
 <section class="notice-area pt-150 pb-150">
 	<div class="container">
 		<div class="row">
-			<div class="col-6">
+			<div class="col-md-6">
 				<div class="notice-left">
 					<h3>Notice Board</h3>
 					@for (int i = 0; i < Model.Notices.Count; i++) {
@@ -47,7 +47,7 @@
 					}
 				</div>
 			</div>
-			<div class="col-6">
+			<div class="col-md-6">
 				<div class="notice-right">
 					@for (int i = 0; i < Model.Features.Count; i++) {
 						<div class='single-notice-right @(i % 3 == 2 ? "" : "mb-25 pb-25")' style="word-wrap: break-word;">
@@ -60,7 +60,6 @@
 		</div>
 	</div>
 </section>
-
 <!-- Notice End -->
 <!-- Choose Start -->
 <section class="choose-area pb-85 pt-77">

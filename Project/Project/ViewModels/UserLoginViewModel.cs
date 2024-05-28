@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Project.ViewModels {
 	public class UserLoginViewModel {
@@ -12,5 +13,6 @@ namespace Project.ViewModels {
 		[DataType(DataType.Password)]
 		public string Password { get; set; }
 		public bool RememberMe { get; set; }
-	}
+		public IEnumerable<AuthenticationScheme>? Schemes { get; set; }
+  }
 }

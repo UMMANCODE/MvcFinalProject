@@ -20,12 +20,12 @@
 <div class="login-area pt-150 pb-150">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6 col-md-offset-3 text-center">
+			<div class="col-md-6 text-center">
 				<div class="login">
 					<div class="login-form-container">
 						<div class="login-text">
 							<h2>login</h2>
-							<span>Please login using account detail bellow.</span>
+							<span>Please login using account detail below.</span>
 						</div>
 						<div class="login-form">
 							<form method="post">
@@ -44,6 +44,28 @@
 								</div>
 							</form>
 						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 text-center">
+				<div class="login">
+					<div class="login-form-container">
+						<div class="login-text">
+							<h2>External login</h2>
+							<span>Please login with external login providers below.</span>
+						</div>
+						@if (Model.Schemes != null && Model.Schemes.Count() > 0) {
+							<div class="d-flex flex-column align-items-center">
+								@foreach (var scheme in Model.Schemes) {
+									<form asp-controller="auth" asp-action="externallogin" method="post" class="w-100 text-center">
+										<button type="submit" name="provider" value="@scheme.Name" class="btn btn-primary w-50 mb-2">@scheme.DisplayName</button>
+									</form>
+								}
+							</div>
+						}
+						else {
+							<p>There are no external authentication services configured.</p>
+						}
 					</div>
 				</div>
 			</div>

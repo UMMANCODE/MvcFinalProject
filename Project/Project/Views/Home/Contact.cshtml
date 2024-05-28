@@ -54,6 +54,7 @@
 				else {
 					@Html.Partial("_ContactFormNAPartial", Model.ContactFormViewModel)
 				}
+				<h3 class='mt-2 text-@TempData["Result"]'>@TempData["Message"]</h3>
 			</div>
 		</div>
 	</div>

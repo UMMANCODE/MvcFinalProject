@@ -25,6 +25,7 @@
 	<link rel="stylesheet" href="~/css/material-design-iconic-font.min.css">
 	<link rel="stylesheet" href="~/css/style.css">
 	<link rel="stylesheet" href="~/css/responsive.css">
+	<link rel="stylesheet" href="~/css/custom-toast.css">
 	@RenderSection("Styles", required: false)
 	<script src="~/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
@@ -136,7 +137,7 @@
 						<form method="post" asp-action="subscribe" asp-controller="home" id="Subscribe-Form">
 							<div class="form">
 								<input type="email" name="Email" id="EmailAddress-Input" placeholder="Enter your e-mail address">
-								<button type="submit" id="Subscribe-Btn" class="default-btn" type="submit">subscribe</button>
+								<button type="submit" id="Subscribe-Btn" class="default-btn">subscribe</button>
 							</div>
 						</form>
 						<h3>@TempData["error"]</h3>
@@ -221,10 +222,13 @@
 	</footer>
 	<!-- Footer End -->
 	<!-- Toast -->
-	@Html.Partial("_ToastPartial")
+	@Html.Partial("_CustomToastPartial")
+
+	<!--SignalR-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.9/signalr.min.js"></script>
+	<script src="~/js/signalr.js"></script>
 
 	<!-- Scripts -->
-	<script src="https://zhiftydk.github.io/bootstrap-toast/bootstrap-toast.js"></script>
 	<script src="~/js/vendor/jquery-1.12.0.min.js"></script>
 	<script src="~/js/bootstrap.min.js"></script>
 	<script src="~/js/jquery.meanmenu.js"></script>

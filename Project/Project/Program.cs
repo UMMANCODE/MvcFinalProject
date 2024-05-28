@@ -3,21 +3,20 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MvcPustok.Data;
+using Project;
 using Project.Models;
 using Project.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddAuthentication(options => {
-  options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-  options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-})
-.AddCookie()
-.AddGoogle(options => {
-  options.ClientId = builder.Configuration["Google:ClientId"];
-  options.ClientSecret = builder.Configuration["Google:ClientSecret"];
-  options.CallbackPath = "/auth/google-response";
-  options.SaveTokens = true;
+builder.Services.AddAuthentication()
+  .AddGoogle(opt => {
+    opt.ClientId = builder.Configuration["Auth:Google:ClientId"];
+    opt.ClientSecret = builder.Configuration["Auth:Google:ClientSecret"];
+  });
+
+builder.Services.AddSignalR(opt => {
+	opt.EnableDetailedErrors = true;
 });
 
 
@@ -78,5 +77,7 @@ app.MapControllerRoute(
 app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapHub<ToastHub>("/toasthub");
 
 app.Run();

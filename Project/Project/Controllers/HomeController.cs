@@ -6,6 +6,7 @@ using Project.Data;
 using Project.Models;
 using Project.Models.Enums;
 using Project.ViewModels;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Project.Controllers {
 	public class HomeController : Controller {
@@ -56,52 +57,57 @@ namespace Project.Controllers {
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> SendMessage(ContactFormViewModel contactFormVM) {
+			var branches = _context.Branches.Take(3).ToList();
+			var contactViewModel = new ContactViewModel {
+				Branches = branches,
+				ContactFormViewModel = contactFormVM
+			};
+
 			if (!ModelState.IsValid) {
-				var branches = _context.Branches.Take(3).ToList();
-				var contactViewModel = new ContactViewModel {
-					Branches = branches,
-					ContactFormViewModel = contactFormVM
-				};
 				return View("Contact", contactViewModel);
 			}
+
+			Contact contact = new();
+
 			if (User.Identity.IsAuthenticated) {
 				var user = await _userManager.GetUserAsync(User);
-				var contact = new Contact {
+				contact = new Contact {
 					Subject = contactFormVM.Subject,
 					Message = contactFormVM.Message,
 					AppUserId = user.Id,
 					AppUser = user
 				};
-				_context.Contacts.Add(contact);
-				await _context.SaveChangesAsync();
-				TempData["success"] = "Message sent successfully";
-				return RedirectToAction("Contact");
 			}
 			else {
 				var name = contactFormVM.Name;
 				var email = contactFormVM.Email;
 				if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(email)) {
 					ModelState.AddModelError("", "Name and Email are required");
-					var branches = _context.Branches.Take(3).ToList();
-					var contactViewModel = new ContactViewModel {
-						Branches = branches,
-						ContactFormViewModel = contactFormVM
-					};
 					return View("Contact", contactViewModel);
 				}
-				var contact = new Contact {
+				contact = new Contact {
 					Name = name,
 					Email = email,
 					Subject = contactFormVM.Subject,
 					Message = contactFormVM.Message
 				};
-				_context.Contacts.Add(contact);
-				await _context.SaveChangesAsync();
-				TempData["success"] = "Message sent successfully";
-				return RedirectToAction("Contact");
+			}
+			_context.Contacts.Add(contact);
+			_context.SaveChanges();
+
+			if (contact.Id > 0) {
+				TempData["Result"] = "success";
+				TempData["Message"] = "Message sent successfully!";
+				return View("Contact", contactViewModel);
+			}
+			else {
+				TempData["Result"] = "danger";
+				TempData["Message"] = "Message failed!";
+				return View("Contact", contactViewModel);
 			}
 		}
 
+		[HttpPost]
 		public async Task<IActionResult> Subscribe(string email) {
 			if (string.IsNullOrEmpty(email)) {
 				return Json(new { success = false, message = "Email is required" });

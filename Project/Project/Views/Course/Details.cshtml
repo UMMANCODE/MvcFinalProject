@@ -72,19 +72,18 @@
 					@if (User.Identity.IsAuthenticated && User.IsInRole("user")) {
 						<div class="reply-area">
 							<h3>Apply to course</h3>
-							<form id="contact-form" asp-action="apply" asp-controller="course" method="post">
+							<form id="application-form" asp-action="apply" asp-controller="course" method="post">
 								<div class="row">
 									<input name="CourseId" type="hidden" value="@Model.ApplyFormVM.CourseId" />
 								</div>
-								@*<a class="reply-btn" asp-action="details" asp-controller="course" asp-route-id="@Model.CourseId">Apply Now!</a>*@
-								<button type="submit" class="reply-btn btn btn-danger">Apply Now!</button>
-								<h3 class="text-success">@ViewBag.Success</h3>
+								<button type="submit" class="btn btn-danger">Apply Now!</button>
 							</form>
 						</div>
 					}
 					else {
 						@Html.Partial("_ApplicationFormPartial", Model.ApplyFormVM);
 					}
+					<h3 class='mt-2 text-@TempData["Result"]'>@TempData["Message"]</h3>
 				</div>
 			</div>
 			<div class="col-md-4">

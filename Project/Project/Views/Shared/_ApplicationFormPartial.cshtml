@@ -1,7 +1,7 @@
 ﻿@model ApplyFormViewModel
 <div class="reply-area">
 	<h3>Apply to course</h3>
-	<form id="contact-form" asp-action="apply" asp-controller="course" method="post">
+	<form id="application-form" asp-action="apply" asp-controller="course" method="post">
 		<div class="row">
 			<div class="col-md-12">
 				<label asp-for="Name">Name</label>
@@ -15,8 +15,6 @@
 			</div>
 			<input name="CourseId" type="hidden" value="@Model.CourseId" />
 		</div>
-		@*<a class="reply-btn" asp-action="details" asp-controller="course" asp-route-id="@Model.CourseId">Apply Now!</a>*@
-		<button type="submit" class="reply-btn btn btn-danger">Apply Now!</button>
-		<h3 class="text-success">@ViewBag.Success</h3>
+		<button type="submit" class="btn btn-danger">Apply Now!</button>
 	</form>
 </div>
