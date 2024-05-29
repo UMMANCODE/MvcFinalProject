@@ -50,9 +50,63 @@
     </div>
     <span class="text-danger" asp-validation-for="ImageFile"></span>
   </div>
+
+  <!-- Skills section -->
+  <div class="form-group">
+    <label>Skills</label>
+    <div id="skills-container">
+      <div class="t-skill">
+        <input type="text" name="Skills[0].Name" class="form-control" placeholder="Skill Name" />
+        <input type="number" name="Skills[0].Percent" class="form-control mt-1" placeholder="Percent" />
+      </div>
+    </div>
+    <button type="button" class="btn btn-default mt-2" onclick="addSkill()"><i class="fa-solid fa-plus"></i></button>
+  </div>
+
+  <!-- Icons section -->
+  <div class="form-group">
+    <label>Icons</label>
+    <div id="icons-container">
+      <div class="t-icon">
+        <input type="text" name="Icons[0].Name" class="form-control" placeholder="Icon Name" />
+        <input type="text" name="Icons[0].Url" class="form-control mt-1" placeholder="Icon URL" />
+      </div>
+    </div>
+    <button type="button" class="btn btn-default mt-2" onclick="addIcon()"><i class="fa-solid fa-plus"></i></button>
+  </div>
+
   <button type="submit" class="btn btn-primary">Create</button>
 </form>
 
 @section Scripts {
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="~/manage/js/custom.js"></script>
+  <script>
+    let skillIndex = 1;
+    let iconIndex = 1;
+
+    function addSkill() {
+      const skillsContainer = document.getElementById('skills-container');
+      const newSkill = document.createElement('div');
+      newSkill.classList.add('t-skill');
+      newSkill.innerHTML = `
+            <input type="text" name="Skills[${skillIndex}].Name" class="form-control mt-3" placeholder="Skill Name" />
+            <input type="number" name="Skills[${skillIndex}].Percent" class="form-control mt-1" placeholder="Percent" />
+          `;
+      skillsContainer.appendChild(newSkill);
+      skillIndex++;
+    }
+
+    function addIcon() {
+      const iconsContainer = document.getElementById('icons-container');
+      const newIcon = document.createElement('div');
+      newIcon.classList.add('t-icon');
+      newIcon.innerHTML = `
+            <input type="text" name="Icons[${iconIndex}].Name" class="form-control mt-3" placeholder="Icon Name" />
+            <input type="text" name="Icons[${iconIndex}].Url" class="form-control mt-1" placeholder="Icon URL" />
+          `;
+      iconsContainer.appendChild(newIcon);
+      iconIndex++;
+    }
+  </script>
 }

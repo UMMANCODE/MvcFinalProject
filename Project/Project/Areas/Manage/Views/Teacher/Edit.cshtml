@@ -51,9 +51,75 @@
 		</div>
 		<span class="text-danger" asp-validation-for="ImageFile"></span>
 	</div>
+
+	<!-- Skills section -->
+	<div class="form-group">
+		<label>Skills</label>
+		<div id="skills-container">
+			@for (int i = 0; i < Model.TeacherSkills.Count; i++) {
+				<div class="t-skill">
+					<input type="hidden" name="TeacherSkills[@i].SkillId" value="@Model.TeacherSkills[i].SkillId" />
+					<input type="hidden" name="TeacherSkills[@i].TeacherId" value="@Model.TeacherSkills[i].TeacherId" />
+					<input asp-for="@Model.TeacherSkills[i].Skill.Name" class="form-control" placeholder="Skill Name" />
+					<input asp-for="@Model.TeacherSkills[i].Skill.Percent" class="form-control" placeholder="Percent" />
+				</div>
+			}
+		</div>
+		<button type="button" class="btn btn-default mt-2" onclick="addSkill()"><i class="fa-solid fa-plus"></i></button>
+	</div>
+
+	<!-- Icons section -->
+	<div class="form-group">
+		<label>Icons</label>
+		<div id="icons-container">
+			@for (int i = 0; i < Model.TeacherIcons.Count; i++) {
+				<div class="t-icon">
+					<input type="hidden" name="TeacherIcons[@i].IconId" value="@Model.TeacherIcons[i].IconId" />
+					<input type="hidden" name="TeacherIcons[@i].TeacherId" value="@Model.TeacherIcons[i].TeacherId" />
+					<input asp-for="@Model.TeacherIcons[i].Icon.Name" class="form-control" placeholder="Icon Name" />
+					<input asp-for="@Model.TeacherIcons[i].Icon.Url" class="form-control" placeholder="Icon URL" />
+				</div>
+			}
+		</div>
+		<button type="button" class="btn btn-default mt-2" onclick="addIcon()"><i class="fa-solid fa-plus"></i></button>
+	</div>
+
 	<button type="submit" class="btn btn-primary">Edit</button>
 </form>
 
 @section Scripts {
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script src="~/manage/js/custom.js"></script>
+	<script>
+		let skillIndex = @Model.TeacherSkills.Count;
+		let iconIndex = @Model.TeacherIcons.Count;
+
+		function addSkill() {
+			const skillsContainer = document.getElementById('skills-container');
+			const newSkill = document.createElement('div');
+			newSkill.classList.add('t-skill');
+			newSkill.innerHTML = `
+										<input type="hidden" name="TeacherSkills[${skillIndex}].SkillId" />
+										<input type="hidden" name="TeacherSkills[${skillIndex}].TeacherId" />
+										<input type="text" name="TeacherSkills[${skillIndex}].Skill.Name" class="form-control" placeholder="Skill Name" />
+										<input type="number" name="TeacherSkills[${skillIndex}].Skill.Percent" class="form-control" placeholder="Percent" />
+								`;
+			skillsContainer.appendChild(newSkill);
+			skillIndex++;
+		}
+
+		function addIcon() {
+			const iconsContainer = document.getElementById('icons-container');
+			const newIcon = document.createElement('div');
+			newIcon.classList.add('t-icon');
+			newIcon.innerHTML = `
+										<input type="hidden" name="TeacherIcons[${iconIndex}].IconId" />
+										<input type="hidden" name="TeacherIcons[${iconIndex}].TeacherId" />
+										<input type="text" name="TeacherIcons[${iconIndex}].Icon.Name" class="form-control" placeholder="Icon Name" />
+										<input type="text" name="TeacherIcons[${iconIndex}].Icon.Url" class="form-control" placeholder="Icon URL" />
+								`;
+			iconsContainer.appendChild(newIcon);
+			iconIndex++;
+		}
+	</script>
 }
