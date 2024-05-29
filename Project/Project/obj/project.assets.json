@@ -2632,6 +2632,23 @@
           }
         }
       },
+      "Stripe.net/44.10.0-beta.1": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3",
+          "System.Configuration.ConfigurationManager": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/Stripe.net.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Stripe.net.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.AppContext/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -8854,6 +8871,30 @@
         "sixlabors.fonts.nuspec"
       ]
     },
+    "Stripe.net/44.10.0-beta.1": {
+      "sha512": "6IQlS966hhowBg7IAEKl2ekTHqyjy1b0c9+ZNPZrQvROsWSMZMUi0Z3TvjNE2jTojNlAK7w5OkpvwJ57HStlvA==",
+      "type": "package",
+      "path": "stripe.net/44.10.0-beta.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "README.md",
+        "icon.png",
+        "lib/net461/Stripe.net.dll",
+        "lib/net461/Stripe.net.xml",
+        "lib/net5.0/Stripe.net.dll",
+        "lib/net5.0/Stripe.net.xml",
+        "lib/net6.0/Stripe.net.dll",
+        "lib/net6.0/Stripe.net.xml",
+        "lib/netcoreapp3.1/Stripe.net.dll",
+        "lib/netcoreapp3.1/Stripe.net.xml",
+        "lib/netstandard2.0/Stripe.net.dll",
+        "lib/netstandard2.0/Stripe.net.xml",
+        "stripe.net.44.10.0-beta.1.nupkg.sha512",
+        "stripe.net.nuspec"
+      ]
+    },
     "System.AppContext/4.3.0": {
       "sha512": "fKC+rmaLfeIzUhagxY17Q9siv/sPrjjKcfNg1Ic8IlQkZLipo8ljcaZQu4VtI4Jqbzjc2VTjzGLF6WmsRXAEgA==",
       "type": "package",
@@ -13214,6 +13255,7 @@
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.5",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 8.0.2",
       "MimeKit >= 4.6.0",
+      "Stripe.net >= 44.10.0-beta.1",
       "System.Net.Mail >= 1.0.0-rtm-00002"
     ]
   },
@@ -13296,6 +13338,10 @@
           "MimeKit": {
             "target": "Package",
             "version": "[4.6.0, )"
+          },
+          "Stripe.net": {
+            "target": "Package",
+            "version": "[44.10.0-beta.1, )"
           },
           "System.Net.Mail": {
             "target": "Package",

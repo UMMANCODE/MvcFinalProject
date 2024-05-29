@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "kWBAGulAyMtDKvMsG1lqMAWkli0yz4+WDbF75Roo/StcLeLS6e+RnzEB4rWi8CzgQeJwmgZMg5HKBbOGvp6/DQ==",
+  "dgSpecHash": "sFBiXfzm0ZMdcp6bEeGtk3j3JJMy5b5f9PQR78g5RNL1WYvgQUIn5SaiDHCnKiLhhP0TvOFbqUqWNNphOL0aDw==",
   "success": true,
   "projectFilePath": "C:\\Users\\user\\Desktop\\Code Academy\\BACKEND\\Project-Eduhome\\Project\\Project\\Project.csproj",
   "expectedPackageFiles": [
@@ -165,6 +165,7 @@
     "C:\\Users\\user\\.nuget\\packages\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\sixlabors.fonts\\1.0.0\\sixlabors.fonts.1.0.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\stripe.net\\44.10.0-beta.1\\stripe.net.44.10.0-beta.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\system.buffers\\4.3.0\\system.buffers.4.3.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\system.codedom\\5.0.0\\system.codedom.5.0.0.nupkg.sha512",

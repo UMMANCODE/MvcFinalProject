@@ -552,3 +552,4 @@ C:\Users\user\Desktop\Code Academy\BACKEND\Project-Eduhome\Project\Project\bin\D
 C:\Users\user\Desktop\Code Academy\BACKEND\Project-Eduhome\Project\Project\bin\Debug\net8.0\SixLabors.Fonts.dll
 C:\Users\user\Desktop\Code Academy\BACKEND\Project-Eduhome\Project\Project\bin\Debug\net8.0\System.IO.Packaging.dll
 C:\Users\user\Desktop\Code Academy\BACKEND\Project-Eduhome\Project\Project\bin\Debug\net8.0\XLParser.dll
+C:\Users\user\Desktop\Code Academy\BACKEND\Project-Eduhome\Project\Project\bin\Debug\net8.0\Stripe.net.dll

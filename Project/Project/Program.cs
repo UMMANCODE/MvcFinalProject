@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MvcPustok.Data;
 using Project;
+using Project.Helpers;
 using Project.Models;
 using Project.Services;
 
@@ -21,6 +22,9 @@ builder.Services.AddSignalR(opt => {
 
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Payment:Stripe"));
+
 builder.Services.AddScoped<StaticService>();
 builder.Services.AddScoped<EmailService>();
 
