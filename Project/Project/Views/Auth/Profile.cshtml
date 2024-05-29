@@ -72,7 +72,7 @@
 														<td>@((item.CreatedAt).ToString("yyyy-MM-dd hh:mm"))</td>
 														<td>@item.Subject</td>
 														<td><a>@item.Message</a></td>
-														<td>$@item.Answer</td>
+														<td>@item.Answer</td>
 													</tr>
 												}
 											</tbody>
@@ -105,7 +105,9 @@
 														<td>@item.Course.Name</td>
 														<td><a>@item.Status</a></td>
 														<td>
-															<a asp-action="cancel" asp-controller="home" asp-route-id="@item.Id" class="btn" style="background-color:#ec1c23">Cancel</a>
+															@if (item.Status == 0) {
+																<a asp-action="cancel" asp-controller="home" asp-route-id="@item.Id" class="btn btn-danger">Cancel</a>
+															}
 														</td>
 													</tr>
 												}

@@ -39,6 +39,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.102.2, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[4.6.0, )"

@@ -2,12 +2,14 @@
 <form method="post" asp-controller="auth" asp-action="profile">
 	<div class="row">
 		<div class="col-12  mb--30">
-			<h4>Change Password</h4>
+			<h4>@(Model.HasPassword ? "Change Password" : "Set New Password")</h4>
 		</div>
-		<div class="col-12  mb--30">
-			<input asp-for=CurrentPassword id="CurrentPassword" placeholder="CurrentPassword">
-			<span class="text-danger" asp-validation-for="CurrentPassword"></span>
-		</div>
+		@if (Model.HasPassword) {
+			<div class="col-12  mb--30">
+				<input asp-for=CurrentPassword id="CurrentPassword" placeholder="CurrentPassword">
+				<span class="text-danger" asp-validation-for="CurrentPassword"></span>
+			</div>
+		}
 		<div class="col-lg-6 col-12  mb--30">
 			<input asp-for=NewPassword id="NewPassword" placeholder="NewPassword">
 			<span class="text-danger" asp-validation-for="NewPassword"></span>

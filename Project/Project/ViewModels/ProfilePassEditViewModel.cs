@@ -15,5 +15,6 @@ namespace Project.ViewModels {
 		[DataType(DataType.Password)]
 		[Compare(nameof(NewPassword))]
 		public string? ConfirmNewPassword { get; set; }
+		public bool HasPassword { get; set; }
 	}
 }
