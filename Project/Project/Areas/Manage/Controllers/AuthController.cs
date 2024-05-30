@@ -98,7 +98,9 @@ namespace Project.Areas.Manage.Controllers {
 				}
 				var result = await _signInManager.PasswordSignInAsync(user, userLoginViewModel.Password, userLoginViewModel.RememberMe, false);
         if (result.Succeeded) {
-					return returnUrl != null ? Redirect(returnUrl) : RedirectToAction("index", "dashboard");
+          user.IsLoggedIn = true;
+          await _userManager.UpdateAsync(user);
+          return returnUrl != null ? Redirect(returnUrl) : RedirectToAction("index", "dashboard");
 				}
         ModelState.AddModelError("", "Invalid login attempt.");
       }
@@ -108,6 +110,10 @@ namespace Project.Areas.Manage.Controllers {
     [Authorize(Roles = "admin, superadmin")]
     public async Task<IActionResult> Logout() {
       await _signInManager.SignOutAsync();
+      var user = await _userManager.GetUserAsync(User);
+      user.IsLoggedIn = false;
+      user.LastActive = DateTime.Now;
+      await _userManager.UpdateAsync(user);
       return RedirectToAction("Index", "Dashboard");
     }
 
