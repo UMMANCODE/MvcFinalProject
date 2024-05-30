@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MvcPustok.Data;
 using Project.Models;
 using Project.ViewModels;
 
 namespace Project.Areas.Manage.Controllers {
-	[Area("Manage")]
+	[Area("manage")]
+	[Authorize(Roles = "admin, superadmin")]
 	public class CategoryController : Controller {
 		private readonly AppDbContext _context;
 

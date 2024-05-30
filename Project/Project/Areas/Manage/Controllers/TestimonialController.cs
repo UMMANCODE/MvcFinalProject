@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MvcPustok.Data;
 using Org.BouncyCastle.Bcpg.Sig;
 using Project.Helpers;
@@ -6,7 +7,8 @@ using Project.Models;
 using Project.ViewModels;
 
 namespace Project.Areas.Manage.Controllers {
-	[Area("Manage")]
+	[Area("manage")]
+	[Authorize(Roles = "admin, superadmin")]
 	public class TestimonialController : Controller {
 		private readonly AppDbContext _context;
 		private readonly IWebHostEnvironment _env;

@@ -7,7 +7,8 @@ using Project.Models;
 using Project.ViewModels;
 
 namespace Project.Areas.Manage.Controllers {
-	[Area("Manage")]
+	[Area("manage")]
+	[Authorize(Roles = "admin, superadmin")]
 	public class UserController : Controller {
 		private readonly UserManager<AppUser> _userManager;
 		private readonly RoleManager<IdentityRole> _roleManager;

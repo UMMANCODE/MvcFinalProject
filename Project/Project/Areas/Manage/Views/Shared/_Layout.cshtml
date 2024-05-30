@@ -149,7 +149,9 @@
 					</div>
 				</div>
 			</div>
-			<a class="btn bg-gradient-primary mt-3 w-100" asp-action="createadmin" asp-controller="auth">Create Admin</a>
+			@if (User.IsInRole("superadmin")) {
+				<a class="btn bg-gradient-primary mt-3 w-100" asp-action="createadmin" asp-controller="auth">Create Admin</a>
+			}
 		</div>
 	</aside>
 	<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">

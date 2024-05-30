@@ -46,7 +46,7 @@ namespace Project.Controllers {
 			var model = new EventDetailsViewModel {
 				Event = evnt,
 				Categories = _context.Categories
-				.Include(c => c.Courses)
+				.Include(c => c.Events)
 				.ToList(),
 				Posts = _context.Posts.ToList(),
 				Tags = _context.Tags.ToList()

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace Project.Areas.Manage.Controllers {
-	[Area("Manage")]
+	[Area("manage")]
 	[Authorize(Roles = "superadmin, admin")]
 	public class ErrorController : Controller {
 		public new IActionResult NotFound() {

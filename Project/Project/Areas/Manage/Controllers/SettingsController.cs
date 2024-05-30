@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Project.Services;
 using Project.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Project.Areas.Manage.Controllers {
-	[Area("Manage")]
+	[Area("manage")]
+	[Authorize(Roles = "admin, superadmin")]
 	public class SettingsController : Controller {
 		private readonly StaticService _staticService;
 		public SettingsController(StaticService staticService) {

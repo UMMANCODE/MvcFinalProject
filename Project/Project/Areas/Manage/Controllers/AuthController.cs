@@ -6,7 +6,7 @@ using Project.Models;
 using Project.ViewModels;
 
 namespace Project.Areas.Manage.Controllers {
-  [Area("Manage")]
+  [Area("manage")]
   public class AuthController : Controller {
     private readonly UserManager<AppUser> _userManager;
     private readonly SignInManager<AppUser> _signInManager;
@@ -105,12 +105,13 @@ namespace Project.Areas.Manage.Controllers {
       return View(userLoginViewModel);
     }
 
-    [Authorize(Roles = "admin superadmin")]
+    [Authorize(Roles = "admin, superadmin")]
     public async Task<IActionResult> Logout() {
       await _signInManager.SignOutAsync();
       return RedirectToAction("Index", "Dashboard");
     }
 
+    [Authorize(Roles = "admin, superadmin")]
     public async Task<IActionResult> ChangePassword(string id) {
       var user = await _userManager.FindByIdAsync(id);
 			if (user == null) {
@@ -124,7 +125,8 @@ namespace Project.Areas.Manage.Controllers {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> ChangePassword(ChangePasswordViewModel changePasswordVM) {
+		[Authorize(Roles = "admin, superadmin")]
+		public async Task<IActionResult> ChangePassword(ChangePasswordViewModel changePasswordVM) {
       if (ModelState.IsValid) {
         var user = await _userManager.FindByIdAsync(changePasswordVM.AppUserId);
         var result = await _userManager.ChangePasswordAsync(user, changePasswordVM.CurrentPassword, changePasswordVM.NewPassword);

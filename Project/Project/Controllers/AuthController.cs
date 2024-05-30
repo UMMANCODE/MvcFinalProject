@@ -35,6 +35,10 @@ namespace Project.Controllers {
 		public async Task<IActionResult> Login(UserLoginViewModel userLoginViewModel, string? returnUrl) {
 			if (ModelState.IsValid) {
 				var user = await _userManager.FindByNameAsync(userLoginViewModel.UserName);
+				if (user == null || !await _userManager.IsInRoleAsync(user, "user")) {
+					ModelState.AddModelError("", "Invalid login attempt.");
+					return View(userLoginViewModel);
+				}
 				if (user != null && await _userManager.IsInRoleAsync(user, "user")
 						&& !await _userManager.IsEmailConfirmedAsync(user)
 						&& (await _userManager.CheckPasswordAsync(user, userLoginViewModel.Password))) {
@@ -106,6 +110,7 @@ namespace Project.Controllers {
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = "user")]
 		public async Task<IActionResult> ForgetPassword(ForgetPasswordViewModel forgetPasswordVM) {
 			if (!ModelState.IsValid) return View(forgetPasswordVM);
 
@@ -153,6 +158,7 @@ namespace Project.Controllers {
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = "user")]
 		public async Task<IActionResult> ResetPassword(ResetPasswordViewModel resetPasswordVM) {
 			TempData["email"] = resetPasswordVM.Email;
 			TempData["token"] = resetPasswordVM.Token;
@@ -191,7 +197,7 @@ namespace Project.Controllers {
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> VerifyEmail(string email) {
 			var user = await _userManager.FindByEmailAsync(email);
-			if (user == null) {
+			if (user == null || !await _userManager.IsInRoleAsync(user, "user")) {
 				return RedirectToAction("NotFound", "Error");
 			}
 			var fullName = user.FullName;
@@ -210,7 +216,7 @@ namespace Project.Controllers {
 		[HttpGet]
 		public async Task<IActionResult> VerifyEmailGet(string email) {
 			var user = await _userManager.FindByEmailAsync(email);
-			if (user == null) {
+			if (user == null || !await _userManager.IsInRoleAsync(user, "user")) {
 				return RedirectToAction("NotFound", "Error");
 			}
 			var fullName = user.FullName;
@@ -228,7 +234,7 @@ namespace Project.Controllers {
 
 		public async Task<IActionResult> ConfirmEmail(string email, string token) {
 			var user = await _userManager.FindByEmailAsync(email);
-			if (user == null) {
+			if (user == null || !await _userManager.IsInRoleAsync(user, "user")) {
 				return RedirectToAction("NotFound", "Error");
 			}
 
@@ -245,7 +251,7 @@ namespace Project.Controllers {
 		public async Task<IActionResult> Profile(string tab = "dashboard") {
 			AppUser? user = await _userManager.GetUserAsync(User);
 
-			if (user == null)
+			if (user == null || !await _userManager.IsInRoleAsync(user, "user"))
 				return RedirectToAction("login", "auth");
 
 			ProfileViewModel profileVM = new() {
@@ -287,7 +293,7 @@ namespace Project.Controllers {
 
 			AppUser? user = await _userManager.GetUserAsync(User);
 
-			if (user == null) return RedirectToAction("login", "auth");
+			if (user == null || !await _userManager.IsInRoleAsync(user, "user")) return RedirectToAction("login", "auth");
 
 			if (!string.IsNullOrWhiteSpace(profileCredEditVM.UserName)) user.UserName = profileCredEditVM.UserName;
 			if (!string.IsNullOrWhiteSpace(profileCredEditVM.Email)) user.Email = profileCredEditVM.Email;

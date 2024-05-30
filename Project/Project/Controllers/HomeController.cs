@@ -25,7 +25,9 @@ namespace Project.Controllers {
 				Notices = _context.Notices.ToList(),
 				Courses = _context.Courses.Take(3).ToList(),
 				Events = _context.Events.OrderByDescending(x => x.StartDate).Take(8).ToList(),
-				Blogs = _context.Blogs.Take(3).ToList(),
+				Blogs = _context.Blogs
+				.Include(x => x.Replies)
+				.Take(3).ToList(),
 				Testimonials = _context.Testimonials.OrderBy(x => x.Order).ToList()
 			};
 			ViewBag.Render = "notrender";

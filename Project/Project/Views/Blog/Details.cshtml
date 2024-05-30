@@ -23,7 +23,7 @@
 			<div class="col-md-8">
 				<div class="blog-details">
 					<div class="blog-details-img">
-						<img src="~/img/blog/blog-detail.jpg" alt="blog-details">
+						<img width="100%" src="~/img/blog/@Model.Blog.ImageName" alt="blog-details">
 					</div>
 					<div class="blog-details-content">
 						<h2>@Model.Blog.Name </h2>
@@ -32,10 +32,10 @@
 					</div>
 					<div id="tab-2" role="tabpanel" aria-labelledby="tab2">
 						<div class="review-wrapper">
-							<h2 class="title-lg mb-3">REVIEWS</h2>
-							<div class="review-container" style="border:solid 1px black;padding:5px">
+							<h2 class="title-lg mb-5">REVIEWS</h2>
+							<div class="review-container mb-5" style="border:solid 1px black;padding:15px">
 								@foreach (var reply in Model.Blog.Replies) {
-									<div class="review-comment mb-3">
+									<div class="review-comment mb-5">
 										<div class="text">
 											<h6 class="author">
 												@reply.AppUser.FullName – <span class="font-weight-400">@reply.CreatedAt.ToString("dd MMMM, yyyy")</span>
@@ -49,9 +49,11 @@
 							</div>
 
 							@if (Model.TotalReplies > Model.Blog.Replies.Count) {
-								<div class="text-center mt-2"><button id="load-more-btn">Load More</button></div>
+								<div class="text-center">
+									<button id="load-more-btn" class="btn btn-default">Load More</button>
+								</div>
 							}
-							@if (!User.Identity.IsAuthenticated || User.IsInRole("admin") || User.IsInRole("super_admin")) {
+							@if (!User.Identity.IsAuthenticated || User.IsInRole("admin") || User.IsInRole("superadmin")) {
 								<h3>
 									Please <a asp-action="login" asp-controller="auth" asp-route-ReturnUrl="/blog/details/@Model.Blog.Id"><span class="text-success">login</span></a> to write a review!
 								</h3>

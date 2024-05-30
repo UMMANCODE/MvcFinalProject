@@ -5,7 +5,7 @@ using Project.Areas.Manage.ViewModels;
 using Project.Models.Enums;
 
 namespace Project.Areas.Manage.Controllers {
-	[Area("Manage")]
+	[Area("manage")]
   [Authorize(Roles = "superadmin, admin")]
   public class DashboardController : Controller {
 		private readonly AppDbContext _context;

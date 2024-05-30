@@ -13,7 +13,7 @@ using Project.ViewModels;
 
 namespace Project.Areas.Manage.Controllers {
 	[Area("manage")]
-	[Authorize(Roles = "superadmin,admin")]
+	[Authorize(Roles = "superadmin, admin")]
 	public class ContactController : Controller {
 		private readonly AppDbContext _context;
 		private readonly EmailService _emailService;
