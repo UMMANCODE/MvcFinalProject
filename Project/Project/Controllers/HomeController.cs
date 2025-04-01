@@ -21,8 +21,8 @@ namespace Project.Controllers {
 		public IActionResult Index() {
 			HomeViewModel homeViewModel = new() {
 				Sliders = _context.Sliders.OrderBy(x => x.Order).ToList(),
-				Features = _context.Features.ToList(),
-				Notices = _context.Notices.ToList(),
+				Features = _context.Features.Take(3).ToList(),
+				Notices = _context.Notices.Take(10).ToList(),
 				Courses = _context.Courses.Take(3).ToList(),
 				Events = _context.Events.OrderByDescending(x => x.StartDate).Take(8).ToList(),
 				Blogs = _context.Blogs
@@ -40,7 +40,7 @@ namespace Project.Controllers {
 				.ThenInclude(ts => ts.Skill).Include(x => x.TeacherIcons)
 				.ThenInclude(ti => ti.Icon)
 				.Take(4).ToList(),
-				Notices = _context.Notices.ToList(),
+				Notices = _context.Notices.Take(7).ToList(),
 				Testimonials = _context.Testimonials.OrderBy(x => x.Order).ToList()
 			};
 			return View(aboutViewModel);

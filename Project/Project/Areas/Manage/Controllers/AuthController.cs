@@ -117,7 +117,6 @@ namespace Project.Areas.Manage.Controllers {
       return RedirectToAction("Index", "Dashboard");
     }
 
-    [Authorize(Roles = "admin, superadmin")]
     public async Task<IActionResult> ChangePassword(string id) {
       var user = await _userManager.FindByIdAsync(id);
 			if (user == null) {

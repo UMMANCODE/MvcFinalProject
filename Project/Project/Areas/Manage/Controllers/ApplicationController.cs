@@ -62,7 +62,7 @@ namespace Project.Areas.Manage.Controllers {
 			}
 			else {
 				body = EmailTemplates.GetCourseEnrollmentEmail(message.Name, message.Course.Name, "approved");
-				_emailService.Send(message.AppUser.Email, "Application Approved", body);
+				_emailService.Send(message.Email, "Application Approved", body);
 			}
 
 			if (message.AppUserId != null)
@@ -87,7 +87,7 @@ namespace Project.Areas.Manage.Controllers {
 			string body;
 			if (message.AppUser != null) {
 				body = EmailTemplates.GetCourseEnrollmentEmail(message.AppUser.FullName, message.Course.Name, "rejected");
-				_emailService.Send(message.AppUser.Email, "Application Rejected", body);
+				_emailService.Send(message.Email, "Application Rejected", body);
 			}
 			else {
 				body = EmailTemplates.GetCourseEnrollmentEmail(message.Name, message.Course.Name, "rejected");
